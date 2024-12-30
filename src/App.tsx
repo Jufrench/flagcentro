@@ -1,20 +1,12 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import '@mantine/core/styles.css';
-
 import { MantineProvider } from '@mantine/core';
-import './App.css'
 
-import countries from '../public/countries.json';
+import './App.css'
 import QuickPlay from './components/QuickPlay';
 
 function App() {
-  // const [count, setCount] = useState(0)
 
-  console.group('%c   ', 'background:limegreen')
-  console.log('countries:', countries);
-  console.groupEnd()
+  console.log('%cGo through index.css to remove unnecessary styling', 'color:tomato');
 
   return (
     <MantineProvider>

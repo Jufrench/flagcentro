@@ -42,7 +42,6 @@ export default function QuickPlay() {
         label="Country Name"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(event.target.value)}
         placeholder="Name..."
-        style={{ textAlign: "left" }}
         value={userAnswer}
         withAsterisk />
       <Button disabled={userAnswer.length < 2 ? true : false} onClick={handleSubmitAnswer}>Submit</Button>
