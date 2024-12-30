@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, Stack, TextInput } from "@mantine/core";
-import { useFocusTrap } from '@mantine/hooks';
 
 import Countries from "../../public/countries.json";
 import FlagDisplay from "./FlagDisplay";
@@ -14,8 +13,6 @@ export default function QuickPlay() {
   const [userAnswer, setUserAnswer] = useState<string>("");
   const [answerEval, setAnswerEval] = useState<boolean | null>(null);
   const [showAnswerEval, setShowAnswerEval] = useState<boolean>(false);
-  
-  const focusTrapRef = useFocusTrap(false);
 
   const handleSubmitAnswer = () => {
     if ((activeCountry.name).toLowerCase() === userAnswer.toLowerCase()) {
@@ -28,7 +25,6 @@ export default function QuickPlay() {
 
     setTimeout(() => {
       handleNextCountry();
-      useFocusTrap(true);
     }, 2000);
   };
 
@@ -43,7 +39,6 @@ export default function QuickPlay() {
       <FlagDisplay activeCountry={activeCountry} />
       {showAnswerEval && <AnswerEvalAlert isCorrect={answerEval} />}
       <TextInput
-        ref={focusTrapRef}
         label="Country Name"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(event.target.value)}
         placeholder="Name..."
