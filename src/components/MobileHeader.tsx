@@ -1,10 +1,6 @@
 import { Burger, Group } from "@mantine/core";
 
-interface MobileHeaderProps {
-
-}
-
-export default function MobileHeader(props: MobileHeaderProps) {
+export default function MobileHeader() {
   return (
     <Group gap="md" p="sm">
       <Burger></Burger>
