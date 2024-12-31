@@ -15,7 +15,7 @@ export default function QuickPlay() {
   const [showAnswerEval, setShowAnswerEval] = useState<boolean>(false);
 
   const handleSubmitAnswer = () => {
-    if ((activeCountry.name).toLowerCase() === userAnswer.toLowerCase()) {
+    if ((activeCountry.name).toLowerCase() === userAnswer.toLowerCase().trim()) {
       setAnswerEval(true);
     } else {
       setAnswerEval(false);
