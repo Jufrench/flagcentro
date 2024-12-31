@@ -39,6 +39,7 @@ export default function QuickPlay() {
       <FlagDisplay activeCountry={activeCountry} />
       {showAnswerEval && <AnswerEvalAlert isCorrect={answerEval} />}
       <TextInput
+        style={{ fontSize: "16px" }}
         label="Country Name"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(event.target.value)}
         placeholder="Name..."
