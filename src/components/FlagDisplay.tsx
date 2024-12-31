@@ -13,6 +13,10 @@ type CountryItem = {
     png: string;
     svg: string;
     alt: string;
+  },
+  name: {
+    en: string;
+    sp: string;
   }
 }
 
