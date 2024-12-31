@@ -7,12 +7,12 @@ interface FlagDisplayProps {
   activeCountry: CountryItem;
 }
 
-type CountryItem = {
+export type CountryItem = {
   flag: string;
   flags: {
     png: string;
     svg: string;
-    alt: string;
+    alt?: string;
   },
   name: {
     en: string;
