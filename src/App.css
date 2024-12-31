@@ -66,3 +66,9 @@
 /* .read-the-docs {
   color: #888;
 } */
+
+/* input { */
+.mantine-TextInput-input {
+  /* border: 1px solid tomato; */
+  font-size: 16px;
+}
