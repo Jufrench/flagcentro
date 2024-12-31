@@ -7,7 +7,6 @@ import MobileHeader from './components/MobileHeader';
 import BottomNavBar from './components/BottomNavBar';
 
 function App() {
-
   console.log('%cGo through index.css to remove unnecessary styling', 'color:tomato');
 
   const headerStyle: {} = {
