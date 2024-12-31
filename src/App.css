@@ -11,6 +11,8 @@
     "footer";
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr; */
+  height: 100vh;
+  height: 100dvh;
 }
 
 /* #header {
@@ -18,7 +20,7 @@
 } */
 
 #main {
- margin: 0 auto;
+ /* margin: 0 auto; */
  padding: 2rem;
 
  /* grid-area: main; */

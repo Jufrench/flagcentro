@@ -20,6 +20,13 @@ function App() {
     zIndex: 1,
   };
 
+  const mainStyle: {} = {
+    paddingTop: "5em",
+    paddingBottom: "4em",
+    paddingRight: "2em",
+    paddingLeft: "2em",
+  };
+
   const footerStyle: {} = {
     position: "fixed",
     bottom: 0,
@@ -34,7 +41,7 @@ function App() {
       <header id="header" style={headerStyle}>
         <MobileHeader />
       </header>
-      <main id="main" style={{ paddingTop: "5em", paddingBottom: "4em" }}>
+      <main id="main" style={mainStyle}>
         <QuickPlay />
       </main>
       <footer id="footer" style={footerStyle}>
