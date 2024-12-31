@@ -1,53 +1,26 @@
-import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
+import { Route, Routes } from 'react-router';
 
-import QuickPlay from './components/QuickPlay';
 import './App.css'
-import MobileHeader from './components/MobileHeader';
-import BottomNavBar from './components/BottomNavBar';
+import PageLayout from './components/PageLayout';
+import QuickPlay from './components/QuickPlay';
+import Search from './components/Search';
+import MultiPlayer from './components/MultiPlayer';
+import Profile from './components/Profile';
 
 function App() {
   console.log('%cGo through index.css to remove unnecessary styling', 'color:tomato');
 
-  const headerStyle: {} = {
-    position: "fixed",
-    top: 0,
-    right: 0,
-    left: 0,
-    background: "#fff",
-    borderBottom: "1px solid #ddd",
-    zIndex: 1,
-  };
-
-  const mainStyle: {} = {
-    paddingTop: "5em",
-    paddingBottom: "4em",
-    paddingRight: "2em",
-    paddingLeft: "2em",
-  };
-
-  const footerStyle: {} = {
-    position: "fixed",
-    bottom: 0,
-    right: 0,
-    left: 0,
-    background: "#fff",
-    borderTop: "1px solid #ddd",
-  };
-
   return (
-    <MantineProvider>
-      <header id="header" style={headerStyle}>
-        <MobileHeader />
-      </header>
-      <main id="main" style={mainStyle}>
-        <QuickPlay />
-      </main>
-      <footer id="footer" style={footerStyle}>
-        <BottomNavBar />
-      </footer>
-    </MantineProvider>
-  )
+    <Routes>
+      <Route path="/" element={<PageLayout />}>
+        <Route path="/" element={<QuickPlay />} />
+        <Route path="search" element={<Search />} />
+        <Route path="multi" element={<MultiPlayer />} />
+        <Route path="profile" element={<Profile />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App
