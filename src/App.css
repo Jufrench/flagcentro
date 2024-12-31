@@ -3,12 +3,31 @@
   /* margin: 0 auto; */
   /* padding: 2rem; */
   /* text-align: center; */
+  /* =========================== */
+  /* display: grid; */
+  /* grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr; */
 }
+
+/* #header {
+  grid-area: header;
+} */
 
 #main {
  margin: 0 auto;
  padding: 2rem;
+
+ /* grid-area: main; */
 }
+
+/* #footer {
+  grid-area: footer;
+  border: 1px solid tomato;
+} */
 
 /* .logo {
   height: 6em;

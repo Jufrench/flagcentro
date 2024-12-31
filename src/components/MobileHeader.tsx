@@ -6,7 +6,7 @@ interface MobileHeaderProps {
 
 export default function MobileHeader(props: MobileHeaderProps) {
   return (
-    <Group gap="md" p="xs">
+    <Group gap="md" p="sm">
       <Burger></Burger>
     </Group>
   )
