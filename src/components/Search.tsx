@@ -9,14 +9,17 @@ export default function Search() {
 
   let foundCoutnries = Countries.filter(country => {
     if (activeRegion !== "") {
-      return 
+      return country.region.toLowerCase().includes(activeRegion);
     }
+    
     return country.name.toLowerCase().includes(userInput.toLowerCase());
   });
 
   const regions = [
-    'africa', 'asia', 'australia', 'europe', 'north america', 'south america'
+    'africa', 'americas', 'asia', 'europe', 'oceania'
   ];
+
+  console.log('activeRegion:', activeRegion)
 
   return (
     <Stack gap="sm">
@@ -29,7 +32,17 @@ export default function Search() {
       <Group gap={4}>
         {regions.map(item => {
           return (
-            <Button color="black" variant="outline" onClick={() => setActiveRegion(item)} size="xs">{item}</Button>
+            <Button
+              color="black"              
+              onClick={() => {
+                const value = activeRegion === item ? "" : item;
+                setActiveRegion(value);
+              }}
+              rightSection={activeRegion === item ? "x" : " "}
+              size="xs"
+              variant={activeRegion === item ? "filled" : "outline"}>
+              {item}
+            </Button>
           )
         })}
       </Group>
