@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Stack, TextInput } from "@mantine/core";
+import { Button, Group, Stack, TextInput } from "@mantine/core";
 
 import Countries from "../../public/countries.json";
 import FlagDisplay from "./FlagDisplay";
@@ -45,8 +45,13 @@ export default function QuickPlay() {
         placeholder="Name..."
         value={userAnswer}
         withAsterisk />
-      <Button disabled={userAnswer.length < 2 ? true : false} onClick={handleSubmitAnswer}>Submit</Button>
-      <SkipButton handleSkipCountry={handleNextCountry} />
+      <Group>
+        <SkipButton handleSkipCountry={handleNextCountry} />
+        <Button
+          disabled={userAnswer.length < 2 ? true : false}
+          onClick={handleSubmitAnswer}
+          style={{ flexGrow: 1 }}>Submit</Button>
+      </Group>
     </Stack>
   );
 }
