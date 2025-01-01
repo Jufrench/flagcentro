@@ -1,4 +1,4 @@
-import { Image, List, Text, TextInput } from "@mantine/core";
+import { Image, SimpleGrid, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
 
 import Countries from "../../public/countries.json";
@@ -14,17 +14,19 @@ export default function Search() {
     <>
       <Text>Search for a Country</Text>
       <TextInput
+        mb="sm"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserInput(event.target.value)}
         value={userInput} />
-      <List listStyleType="none" mt="md" style={{ textAlign: "center" }}>
+      <SimpleGrid cols={3}>
         {foundCoutnries.map((country: any) => {
           return (
-            <List.Item>
+            <div>
+              <Text size="md">{country.name}</Text>
               <Image src={country.flags.png} alt={country.flags.alt} />
-            </List.Item>
+            </div>
           )
         })}
-      </List>
+      </SimpleGrid>
     </>
   )
 }
