@@ -11,7 +11,7 @@ export default function Search() {
     if (activeRegion !== "") {
       return country.region.toLowerCase().includes(activeRegion);
     }
-    
+
     return country.name.toLowerCase().includes(userInput.toLowerCase());
   });
 
@@ -50,7 +50,10 @@ export default function Search() {
         {foundCoutnries.map((country: any) => {
           return (
             <div>
-              <Text size="md">{country.name}</Text>
+              <Text size="md" style={{
+                background: "#fff",
+                color: "#000"
+              }}>{country.name}</Text>
               <Image src={country.flags.png} alt={country.flags.alt} />
             </div>
           )
