@@ -33,7 +33,7 @@ export default function QuickPlay() {
   return (
     <Stack>
       <FlagDisplay activeCountry={activeCountry} />
-      {showAnswerEval && <AnswerEvalAlert isCorrect={answerEval} />}
+      {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
       <TextInput
         style={{ fontSize: "16px" }}
         label="Country Name"
