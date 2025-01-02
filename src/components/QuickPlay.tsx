@@ -4,7 +4,7 @@ import { Button, Group, Stack, TextInput } from "@mantine/core";
 import Countries from "../../public/countries.json";
 import FlagDisplay from "./FlagDisplay";
 import AnswerEvalAlert from "./AnswerEvalAlert";
-import SkipButton from "./SkipButton";
+import NextButton from "./NextButton";
 
 export default function QuickPlay() {
   const randNum = Math.floor(Math.random() * 250);
@@ -22,10 +22,6 @@ export default function QuickPlay() {
     }
 
     setShowAnswerEval(true);
-
-    setTimeout(() => {
-      handleNextCountry();
-    }, 2000);
   };
 
   const handleNextCountry = () => {
@@ -46,7 +42,7 @@ export default function QuickPlay() {
         value={userAnswer}
         withAsterisk />
       <Group>
-        <SkipButton handleSkipCountry={handleNextCountry} />
+        <NextButton handleNextCountry={handleNextCountry} />
         <Button
           disabled={userAnswer.length < 2 ? true : false}
           onClick={handleSubmitAnswer}
