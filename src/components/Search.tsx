@@ -15,9 +15,7 @@ export default function Search() {
     return country.name.toLowerCase().includes(userInput.toLowerCase());
   });
 
-  const regions = [
-    'africa', 'americas', 'asia', 'europe', 'oceania'
-  ];
+  const regions = [ 'africa', 'americas', 'asia', 'europe', 'oceania' ];
 
   console.log('activeRegion:', activeRegion)
 
@@ -29,7 +27,7 @@ export default function Search() {
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserInput(event.target.value)}
           value={userInput} />
       </div>
-      <Group gap={4}>
+      <Group gap={4} style={{ flexWrap: "nowrap", overflowX: "scroll" }}>
         {regions.map(item => {
           return (
             <Button
@@ -41,6 +39,7 @@ export default function Search() {
               }}
               rightSection={activeRegion === item ? "x" : " "}
               size="xs"
+              style={{ overflow: "visible" }}
               variant={activeRegion === item ? "filled" : "outline"}>
               {item}
             </Button>
