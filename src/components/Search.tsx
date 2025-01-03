@@ -33,6 +33,7 @@ export default function Search() {
         {regions.map(item => {
           return (
             <Button
+              key={item}
               color="black"              
               onClick={() => {
                 const value = activeRegion === item ? "" : item;
@@ -49,7 +50,7 @@ export default function Search() {
       <SimpleGrid cols={3}>
         {foundCoutnries.map((country: any) => {
           return (
-            <div>
+            <div key={country.name}>
               <Text size="md" style={{
                 background: "#fff",
                 color: "#000"

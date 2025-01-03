@@ -34,6 +34,9 @@ export default function QuickPlay() {
     setUserAnswer("");
     setShowAnswerEval(false);
     setIsSubmitDisabled(false);
+
+    const activeCountryIndex = countries.findIndex(country => activeCountry.name === country.name);
+    countries.splice(activeCountryIndex, 1);
   };
 
   const handleStartQuickPlay = (value: boolean) => {
