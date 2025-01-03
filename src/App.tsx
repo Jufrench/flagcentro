@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router';
 
 import './App.css'
 import PageLayout from './components/PageLayout';
-import QuickPlay from './components/QuickPlay';
+import QuickPlay from './components/quickplay/QuickPlay';
 import Search from './components/Search';
 import MultiPlayer from './components/MultiPlayer';
 import Profile from './components/Profile';
