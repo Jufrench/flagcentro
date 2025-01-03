@@ -11,7 +11,7 @@ export default function QuickPlay() {
   const randNum = Math.floor(Math.random() * 250);
 
   const [isQuickPlayReady, setIsQuickPlayReady] = useState<boolean>(false);
-  const [activeCountry, setActiveCountry] = useState<any>(Countries[randNum]);
+  const [activeCountry, setActiveCountry] = useState<any | null>(Countries[randNum]);
   const [userAnswer, setUserAnswer] = useState<string>("");
   const [answerEval, setAnswerEval] = useState<boolean | null>(null);
   const [showAnswerEval, setShowAnswerEval] = useState<boolean>(false);
@@ -41,7 +41,7 @@ export default function QuickPlay() {
 
   return (
     <>
-      <Stack>
+      {isQuickPlayReady && <Stack>
         <FlagDisplay activeCountry={activeCountry} />
         {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
         <TextInput
@@ -58,7 +58,7 @@ export default function QuickPlay() {
             onClick={handleSubmitAnswer}
             style={{ flexGrow: 1 }}>Submit</Button>
         </Group>
-      </Stack>
+      </Stack>}
       <QuickPlayModal handleStartQuickPlay={handleStartQuickPlay} />
     </>
   );
