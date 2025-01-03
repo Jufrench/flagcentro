@@ -13,6 +13,7 @@ export default function QuickPlay() {
   const [userAnswer, setUserAnswer] = useState<string>("");
   const [answerEval, setAnswerEval] = useState<boolean | null>(null);
   const [showAnswerEval, setShowAnswerEval] = useState<boolean>(false);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(false);
 
   const handleSubmitAnswer = () => {
     if ((activeCountry.name).toLowerCase() === userAnswer.toLowerCase().trim()) {
@@ -22,12 +23,14 @@ export default function QuickPlay() {
     }
 
     setShowAnswerEval(true);
+    setIsSubmitDisabled(true);
   };
 
   const handleNextCountry = () => {
     setActiveCountry(Countries[randNum]);
     setUserAnswer("");
     setShowAnswerEval(false);
+    setIsSubmitDisabled(false);
   };
 
   return (
@@ -44,7 +47,7 @@ export default function QuickPlay() {
       <Group>
         <NextButton handleNextCountry={handleNextCountry} />
         <Button
-          disabled={userAnswer.length < 2 ? true : false}
+          disabled={userAnswer.length < 2 ? true : isSubmitDisabled}
           onClick={handleSubmitAnswer}
           style={{ flexGrow: 1 }}>Submit</Button>
       </Group>
