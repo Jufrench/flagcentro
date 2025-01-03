@@ -41,7 +41,7 @@ export default function QuickPlay() {
 
   const handleStartQuickPlay = (value: boolean) => {
     setIsQuickPlayReady(value);
-  }
+  };
 
   return (
     <>
