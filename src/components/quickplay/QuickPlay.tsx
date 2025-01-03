@@ -5,13 +5,14 @@ import Countries from "../../../public/countries.json";
 import FlagDisplay from "../FlagDisplay";
 import AnswerEvalAlert from "../AnswerEvalAlert";
 import NextButton from "../NextButton";
-import QuickPlayModal from "./QuickPlayModal";
+import QuickPlayIntro from "./QuickPlayIntro";
 
 export default function QuickPlay() {
-  const randNum = Math.floor(Math.random() * 250);
+  let countries = Countries;
+  const randNum = Math.floor(Math.random() * countries.length);
 
   const [isQuickPlayReady, setIsQuickPlayReady] = useState<boolean>(false);
-  const [activeCountry, setActiveCountry] = useState<any | null>(Countries[randNum]);
+  const [activeCountry, setActiveCountry] = useState<any | null>(countries[randNum]);
   const [userAnswer, setUserAnswer] = useState<string>("");
   const [answerEval, setAnswerEval] = useState<boolean | null>(null);
   const [showAnswerEval, setShowAnswerEval] = useState<boolean>(false);
@@ -29,37 +30,43 @@ export default function QuickPlay() {
   };
 
   const handleNextCountry = () => {
-    setActiveCountry(Countries[randNum]);
+    setActiveCountry(countries[randNum]);
     setUserAnswer("");
     setShowAnswerEval(false);
     setIsSubmitDisabled(false);
   };
 
-  const handleStartQuickPlay = () => {
-    setIsQuickPlayReady(true);
+  const handleStartQuickPlay = (value: boolean) => {
+    setIsQuickPlayReady(value);
   }
 
   return (
     <>
-      {isQuickPlayReady && <Stack>
-        <FlagDisplay activeCountry={activeCountry} />
-        {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
-        <TextInput
-          style={{ fontSize: "16px" }}
-          label="Country Name"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(event.target.value)}
-          placeholder="Name..."
-          value={userAnswer}
-          withAsterisk />
-        <Group>
-          <NextButton handleNextCountry={handleNextCountry} />
-          <Button
-            disabled={userAnswer.length < 2 ? true : isSubmitDisabled}
-            onClick={handleSubmitAnswer}
-            style={{ flexGrow: 1 }}>Submit</Button>
-        </Group>
-      </Stack>}
-      <QuickPlayModal handleStartQuickPlay={handleStartQuickPlay} />
+      {!isQuickPlayReady
+        ?
+        <QuickPlayIntro handleStartQuickPlay={handleStartQuickPlay} />
+        :
+        <Stack>
+          <FlagDisplay activeCountry={activeCountry} />
+          {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
+          <TextInput
+            style={{ fontSize: "16px" }}
+            label="Country Name"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(event.target.value)}
+            placeholder="Name..."
+            value={userAnswer}
+            withAsterisk />
+          <Group>
+            <NextButton handleNextCountry={handleNextCountry} />
+            <Button
+              disabled={userAnswer.length < 2 ? true : isSubmitDisabled}
+              onClick={handleSubmitAnswer}
+              style={{ flexGrow: 1 }}
+            >
+              Submit
+            </Button>
+          </Group>
+        </Stack>}
     </>
   );
 }
