@@ -5,7 +5,8 @@ import Countries from "../../../public/countries.json";
 import FlagDisplay from "../FlagDisplay";
 import AnswerEvalAlert from "../AnswerEvalAlert";
 import NextButton from "../NextButton";
-import QuickPlayIntro from "./QuickPlayIntro";
+import QuickPlayIntro from "./StandardQuickPlay";
+import RegionQuickPlay from "./RegionQuickPlay";
 
 export default function QuickPlay() {
   let countries = Countries;
@@ -47,7 +48,10 @@ export default function QuickPlay() {
     <>
       {!isQuickPlayReady
         ?
-        <QuickPlayIntro handleStartQuickPlay={handleStartQuickPlay} />
+        <>
+          <QuickPlayIntro handleStartQuickPlay={handleStartQuickPlay} />
+          <RegionQuickPlay />
+        </>
         :
         <Stack>
           <FlagDisplay activeCountry={activeCountry} />
