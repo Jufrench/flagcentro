@@ -2,7 +2,7 @@ import { Button, Card, Stack, Text, Title } from "@mantine/core";
 
 export default function RegionQuickPlay() {
   return (
-    <Card shadow="sm">
+    <Card shadow="md">
       <Stack>
         <Title order={4}>Region Quick Play</Title>
         <Text>Test by region</Text>

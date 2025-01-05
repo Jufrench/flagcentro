@@ -6,7 +6,7 @@ interface QuickPlayIntroProps {
 
 export default function QuickPlayIntro(props: QuickPlayIntroProps) {
   return (
-    <Card shadow="sm">
+    <Card shadow="md">
       <Stack>
         <Title order={4}>Standard Quick Play</Title>
         <Text>Test your knowledge of all flags of the world.</Text>

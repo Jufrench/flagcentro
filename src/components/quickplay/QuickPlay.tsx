@@ -48,10 +48,10 @@ export default function QuickPlay() {
     <>
       {!isQuickPlayReady
         ?
-        <>
+        <Stack gap="lg">
           <QuickPlayIntro handleStartQuickPlay={handleStartQuickPlay} />
           <RegionQuickPlay />
-        </>
+        </Stack>
         :
         <Stack>
           <FlagDisplay activeCountry={activeCountry} />
