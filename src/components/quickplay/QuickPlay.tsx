@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Group, Stack, TextInput } from "@mantine/core";
 
-import Countries from "../../../public/countries.json";
+import Countries from "../../assets/countries.json";
 import FlagDisplay from "../FlagDisplay";
 import AnswerEvalAlert from "../AnswerEvalAlert";
 import NextButton from "../NextButton";

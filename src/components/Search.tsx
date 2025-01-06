@@ -1,7 +1,7 @@
 import { Button, Group, Image, SimpleGrid, Stack, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
 
-import Countries from "../../public/countries.json";
+import Countries from "../assets/countries.json";
 
 export default function Search() {
   const [userInput, setUserInput] = useState("");
