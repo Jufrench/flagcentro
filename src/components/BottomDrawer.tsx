@@ -24,18 +24,15 @@ export default function BottomDrawer(props: BottomDrawerProps) {
       opened={props.opened}
       position="bottom"
       size={props.size ?? "100%"}
-      style={{
-        drawer: {
+      styles={{
+        content: {
           display: "flex",
           flexDirection: "column",
-          height: "100%",
-          "& > :nth-child(2)": {
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            minHeight: 0,
-          },
         },
+        body: {
+          flexGrow: 1,
+          overflowY: "auto"
+        }
       }}
     >
       <Box style={{ flexGrow: 1, overflow: 'auto' }}>
