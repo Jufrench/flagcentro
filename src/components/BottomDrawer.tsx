@@ -17,22 +17,14 @@ interface BottomDrawerProps extends DrawerProps {
 }
 
 export default function BottomDrawer(props: BottomDrawerProps) {
-  const style1 = {
-    height: "100vh"
-  };
 
-  const style2 = {
-    height: "100dvh"
-  };
-  
   return (
     <Drawer
       onClose={props.onClose}
       opened={props.opened}
       position="bottom"
       size={props.size ?? "100%"}
-      title={props.title ?? null}
-      style={{...style1, ...style2}}>
+      title={props.title ?? null}>
       {props.children}
     </Drawer>
   )
