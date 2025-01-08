@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { Box, Drawer, DrawerProps, ScrollArea } from "@mantine/core";
+import { Drawer, DrawerProps, ScrollArea } from "@mantine/core";
 
 interface DrawerWrapperProps extends DrawerProps {
   /**
