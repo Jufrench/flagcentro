@@ -10,7 +10,11 @@ export default function ModalWrapper(props: ModalWrapperProps) {
       onClose={props.onClose}
       opened={props.opened}
       title={props.title}
-      scrollAreaComponent={ScrollArea.Autosize}>
+      scrollAreaComponent={ScrollArea.Autosize}
+      removeScrollProps={{
+        allowPinchZoom: true,
+        enabled: false
+      }}>
       {props.children}
     </Modal>
   )
