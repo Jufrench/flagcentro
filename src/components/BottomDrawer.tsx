@@ -19,16 +19,25 @@ interface BottomDrawerProps extends DrawerProps {
 export default function BottomDrawer(props: BottomDrawerProps) {
 
   return (
-    <Drawer
+    <Drawer.Root
       className={RemoveScroll.classNames.fullWidth}
       data-autofocus
       onClose={props.onClose}
       opened={props.opened}
       position="bottom"
       size={props.size ?? "100%"}
-      title={props.title ?? null}
       scrollAreaComponent={ScrollArea.Autosize}>
-      {props.children}
-    </Drawer>
+      <Drawer.Content>
+        <Drawer.Header>
+          <Drawer.Title>{props.title ?? null}</Drawer.Title>
+          <Drawer.CloseButton />
+        </Drawer.Header>
+        <Drawer.Body>
+          <ScrollArea>
+            {props.children}
+          </ScrollArea>
+        </Drawer.Body>
+      </Drawer.Content>
+    </Drawer.Root>
   )
 }
