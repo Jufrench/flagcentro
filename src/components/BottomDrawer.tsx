@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { Drawer, DrawerProps } from "@mantine/core";
+import { Drawer, DrawerProps, ScrollArea } from "@mantine/core";
 
 interface BottomDrawerProps extends DrawerProps {
   /**
@@ -24,7 +24,8 @@ export default function BottomDrawer(props: BottomDrawerProps) {
       opened={props.opened}
       position="bottom"
       size={props.size ?? "100%"}
-      title={props.title ?? null}>
+      title={props.title ?? null}
+      scrollAreaComponent={ScrollArea.Autosize}>
       {props.children}
     </Drawer>
   )
