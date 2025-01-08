@@ -25,7 +25,7 @@ export default function BottomDrawer(props: BottomDrawerProps) {
       position="bottom"
       size={props.size ?? "100%"}
       styles={{
-        content: {
+        root: {
           display: "flex",
           flexDirection: "column",
         },
