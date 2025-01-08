@@ -28,6 +28,13 @@ export default function BottomDrawer(props: BottomDrawerProps) {
         root: {
           display: "flex",
           flexDirection: "column",
+          height: "100%",
+          "& > :nth-child(2)": {
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            minHeight: 0,
+          },
         },
         body: {
           flexGrow: 1,
