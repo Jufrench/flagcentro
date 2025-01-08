@@ -30,9 +30,7 @@ export default function DrawerWrapper(props: DrawerWrapperProps) {
         allowPinchZoom: true,
         enabled: false
       }}>
-      <Box style={{ flexGrow: 1, overflow: 'auto' }}>
-        {props.children}
-      </Box>
+      {props.children}
     </Drawer>
   )
 
