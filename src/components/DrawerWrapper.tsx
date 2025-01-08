@@ -1,7 +1,7 @@
 import { ReactElement } from "react"
-import { Box, Drawer, DrawerProps } from "@mantine/core";
+import { Box, Drawer, DrawerProps, ScrollArea } from "@mantine/core";
 
-interface BottomDrawerProps extends DrawerProps {
+interface DrawerWrapperProps extends DrawerProps {
   /**
    * What do display inside drawer
    */
@@ -16,14 +16,20 @@ interface BottomDrawerProps extends DrawerProps {
   title?: string | null;
 }
 
-export default function BottomDrawer(props: BottomDrawerProps) {
+export default function DrawerWrapper(props: DrawerWrapperProps) {
 
   return (
     <Drawer
       onClose={props.onClose}
       opened={props.opened}
       position="bottom"
-      size={props.size ?? "100%"}>
+      size={props.size ?? "100%"}
+      title={props.title}
+      scrollAreaComponent={ScrollArea.Autosize}
+      removeScrollProps={{
+        allowPinchZoom: true,
+        enabled: false
+      }}>
       <Box style={{ flexGrow: 1, overflow: 'auto' }}>
         {props.children}
       </Box>
