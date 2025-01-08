@@ -20,7 +20,8 @@ export default function QuickPlay() {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(false);
 
   const handleSubmitAnswer = () => {
-    if ((activeCountry.name).toLowerCase() === userAnswer.toLowerCase().trim()) {
+    if ((activeCountry.name).toLowerCase() === userAnswer.toLowerCase().trim()
+      || (activeCountry.names.es.common).toLowerCase() === userAnswer.toLowerCase().trim()) {
       setAnswerEval(true);
     } else {
       setAnswerEval(false);
