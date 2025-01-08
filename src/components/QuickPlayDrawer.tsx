@@ -38,7 +38,7 @@ export default function QuickPlayDrawer() {
   };
 
   return (
-    <Stack pt="5em" pb="4em">
+    <Stack pt="5em" pb="4em" style={{ minHeight: "100vh" }}>
       <FlagDisplay activeCountry={activeCountry} />
       {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
       <TextInput
