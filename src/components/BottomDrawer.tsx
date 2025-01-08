@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { Drawer, DrawerProps, ScrollArea } from "@mantine/core";
+import { Drawer, DrawerProps, RemoveScroll, ScrollArea } from "@mantine/core";
 
 interface BottomDrawerProps extends DrawerProps {
   /**
@@ -20,6 +20,8 @@ export default function BottomDrawer(props: BottomDrawerProps) {
 
   return (
     <Drawer
+      className={RemoveScroll.classNames.fullWidth}
+      data-autofocus
       onClose={props.onClose}
       opened={props.opened}
       position="bottom"
