@@ -4,7 +4,7 @@ import { IconBoltFilled, IconFriends, IconHomeFilled, IconSearch, IconUser } fro
 import { useDisclosure } from "@mantine/hooks";
 
 import QuickPlayContent from "./quickplay/QuickPlayContent";
-import ModalWrapper from "./ModalWrapper";
+import DrawerWrapper from "./DrawerWrapper";
 
 export default function BottomNavBar() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -20,9 +20,9 @@ export default function BottomNavBar() {
         <NavLink to="/multi" end><ActionIcon size="xl" variant="light"><IconFriends /></ActionIcon></NavLink>
         <NavLink to="/profile" end><ActionIcon size="xl" variant="light"><IconUser /></ActionIcon></NavLink>
       </Group>
-      <ModalWrapper opened={opened} onClose={close} title="Quick Play">
+      <DrawerWrapper opened={opened} onClose={close} title="Quick Play">
         <QuickPlayContent />
-      </ModalWrapper>
+      </DrawerWrapper>
     </>
   )
 }
