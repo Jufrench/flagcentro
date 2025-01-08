@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { Drawer, DrawerProps, RemoveScroll, ScrollArea } from "@mantine/core";
+import { Box, Drawer, DrawerProps } from "@mantine/core";
 
 interface BottomDrawerProps extends DrawerProps {
   /**
@@ -19,25 +19,30 @@ interface BottomDrawerProps extends DrawerProps {
 export default function BottomDrawer(props: BottomDrawerProps) {
 
   return (
-    <Drawer.Root
-      className={RemoveScroll.classNames.fullWidth}
-      data-autofocus
+    <Drawer
       onClose={props.onClose}
       opened={props.opened}
       position="bottom"
       size={props.size ?? "100%"}
-      scrollAreaComponent={ScrollArea.Autosize}>
-      <Drawer.Content>
-        <Drawer.Header>
-          <Drawer.Title>{props.title ?? null}</Drawer.Title>
-          <Drawer.CloseButton />
-        </Drawer.Header>
-        <Drawer.Body>
-          <ScrollArea>
-            {props.children}
-          </ScrollArea>
-        </Drawer.Body>
-      </Drawer.Content>
-    </Drawer.Root>
+      style={{
+        drawer: {
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          "& > :nth-child(2)": {
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            minHeight: 0,
+          },
+        },
+      }}
+    >
+      <Box style={{ flexGrow: 1, overflow: 'auto' }}>
+        {props.children}
+      </Box>
+    </Drawer>
   )
+
+  
 }
