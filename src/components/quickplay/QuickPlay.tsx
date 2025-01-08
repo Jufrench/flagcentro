@@ -21,7 +21,7 @@ export default function QuickPlay() {
 
   const handleSubmitAnswer = () => {
     if ((activeCountry.name).toLowerCase() === userAnswer.toLowerCase().trim()
-      || (activeCountry.names.es.common).toLowerCase() === userAnswer.toLowerCase().trim()) {
+      || (activeCountry.names.es).toLowerCase() === userAnswer.toLowerCase().trim()) {
       setAnswerEval(true);
     } else {
       setAnswerEval(false);

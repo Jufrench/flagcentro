@@ -14,9 +14,10 @@ export type CountryItem = {
     svg: string;
     alt?: string;
   },
-  name: {
+  name: string;
+  names: {
     en: string;
-    sp: string;
+    es: string;
   }
 }
 

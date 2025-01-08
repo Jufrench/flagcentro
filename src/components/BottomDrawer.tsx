@@ -23,25 +23,7 @@ export default function BottomDrawer(props: BottomDrawerProps) {
       onClose={props.onClose}
       opened={props.opened}
       position="bottom"
-      size={props.size ?? "100%"}
-      styles={{
-        root: {
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          "& > :nth-child(2)": {
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            minHeight: 0,
-          },
-        },
-        body: {
-          flexGrow: 1,
-          overflowY: "auto"
-        }
-      }}
-    >
+      size={props.size ?? "100%"}>
       <Box style={{ flexGrow: 1, overflow: 'auto' }}>
         {props.children}
       </Box>
