@@ -39,7 +39,7 @@ export default function QuickPlayContent() {
   };
 
   return (
-    <Stack pt="5em">
+    <Stack>
       <FlagDisplay activeCountry={activeCountry} />
       {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
       <TextInput
