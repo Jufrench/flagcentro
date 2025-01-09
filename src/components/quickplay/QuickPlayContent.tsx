@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { Button, Group, Stack, TextInput } from "@mantine/core";
+import { IconCheck } from "@tabler/icons-react";
 
 import Countries from "../../assets/countries.json";
-import { useState } from "react";
 import FlagDisplay from "../FlagDisplay";
 import AnswerEvalAlert from "../AnswerEvalAlert";
 import NextButton from "../NextButton";
@@ -43,20 +44,17 @@ export default function QuickPlayContent() {
       {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
       <TextInput
         style={{ fontSize: "16px" }}
-        label="Country Name"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(event.target.value)}
-        placeholder="Name..."
+        placeholder="Country Name"
         value={userAnswer}
         withAsterisk />
       <Group>
         <NextButton handleNextCountry={handleNextCountry} />
         <Button
+          style={{ flexGrow: 1 }}
           disabled={userAnswer.length < 2 ? true : isSubmitDisabled}
           onClick={handleSubmitAnswer}
-          style={{ flexGrow: 1 }}
-        >
-          Submit
-        </Button>
+        ><IconCheck /></Button>
       </Group>
     </Stack>
   )
