@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Group, Stack, TextInput } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 
@@ -16,6 +16,8 @@ export default function QuickPlayContent() {
   const [answerEval, setAnswerEval] = useState<boolean | null>(null);
   const [showAnswerEval, setShowAnswerEval] = useState<boolean>(false);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(false);
+  const [totalAnswers, setTotalAnswers] = useState<number>(0);
+  const [correctAnswers, setCorrectAnswers] = useState<number>(0);
 
   const handleNextCountry = () => {
     setActiveCountry(countries[randNum]);
@@ -30,17 +32,30 @@ export default function QuickPlayContent() {
   const handleSubmitAnswer = () => {
     if ((activeCountry.name).toLowerCase() === userAnswer.toLowerCase().trim()) {
       setAnswerEval(true);
+      setCorrectAnswers(prevCorrect => prevCorrect + 1);
     } else {
       setAnswerEval(false);
     }
 
+    setTotalAnswers(prevScore => prevScore + 1);
     setShowAnswerEval(true);
     setIsSubmitDisabled(true);
   };
+  
+  useEffect(() => {
+    console.group('%c   ', 'background:limegreen')
+    console.log('correctAnswers:', correctAnswers)
+    console.log('totalAnswers:', totalAnswers)
+    console.groupEnd()
+  }, [totalAnswers])
 
   return (
     <Stack pt="5em" pb="4em">
       <FlagDisplay activeCountry={activeCountry} />
+      <Group gap={5}>
+        <span>Score: </span>
+        <span><span>{correctAnswers}</span><span>/</span><span>{totalAnswers}</span></span>
+      </Group>
       {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
       <TextInput
         style={{ fontSize: "16px" }}
