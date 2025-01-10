@@ -52,11 +52,13 @@ export default function QuickPlayContent() {
   return (
     <Stack pt="5em" pb="4em">
       <FlagDisplay activeCountry={activeCountry} />
-      <Group gap={5}>
-        <span>Score: </span>
-        <span><span>{correctAnswers}</span><span>/</span><span>{totalAnswers}</span></span>
+      <Group justify="flex-end">
+        {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
+        <Group gap={5}>
+          <span>Score: </span>
+          <span><span>{correctAnswers}</span><span>/</span><span>{totalAnswers}</span></span>
+        </Group>
       </Group>
-      {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
       <TextInput
         style={{ fontSize: "16px" }}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(event.target.value)}

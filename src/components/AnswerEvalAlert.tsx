@@ -12,6 +12,7 @@ export default function AnswerEvalAlert(props: AnswerEvalAlertProps) {
 
   return (
     <Alert
+      style={{ flexGrow: 1 }}
       p={5}
       color={props.isCorrect ? "green" : "red"}
       icon={props.isCorrect ? happyIcon : sadIcon}
