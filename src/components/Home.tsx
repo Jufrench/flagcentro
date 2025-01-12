@@ -1,11 +1,39 @@
-import { Button, Card, Stack, Text, Title } from "@mantine/core";
+import { useState } from "react";
+import { Button, Card, Group, Radio, Stack, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
 import QuickPlayModalWrapper from "./quickplay/QuickPlayModalWrapper";
 import QuickPlayContent from "./quickplay/QuickPlayContent";
 
 export default function Home() {
+  const regions = [ 'africa', 'americas', 'asia', 'europe', 'oceania' ];
   const [opened, { open, close }] = useDisclosure(false);
+  const [activeRegions, setActiveRegions] = useState<string[]>([]);
+
+  const RegionsButtons = () => {
+    return (
+      <>
+        {regions.map((region: string) => (
+          <Radio
+            key={region}
+            checked={activeRegions?.includes(region)}
+            label={region.charAt(0).toUpperCase() + region.slice(1)}
+            onChange={() => {}}
+            onClick={() => {
+              if (activeRegions && !activeRegions.includes(region)) {
+                setActiveRegions([...activeRegions, region])
+              }
+
+              console.log('%cTODO: make this more efficient', 'background:goldenrod')
+              if (activeRegions.includes(region)) {
+                const updatedRegions = activeRegions.filter(activeItem => activeItem !== region);
+                setActiveRegions([...updatedRegions]);
+              }
+            }} />
+        ))}
+      </>
+    )
+  };
 
   return (
     <>
@@ -17,16 +45,21 @@ export default function Home() {
             <Button onClick={open}>Start Quickplay</Button>
           </Stack>
         </Card>
+
         <Card shadow="md">
           <Stack>
             <Title order={4}>Region Quick Play</Title>
             <Text>Test by region</Text>
+            <Group>
+              <RegionsButtons />
+            </Group>
             <Button onClick={open}>Start Region Quickplay</Button>
           </Stack>
         </Card>
+
       </Stack>
       <QuickPlayModalWrapper opened={opened} onClose={close} title="Quick Play">
-        <QuickPlayContent />
+        <QuickPlayContent countriesFilter={activeRegions} />
       </QuickPlayModalWrapper>
     </>
   )

@@ -11,14 +11,22 @@ interface QuickPlayContentProps {
   /**
    * How to filter the countries. If no value passed, all are used.
    */
-  countriesFilter?: string;
+  countriesFilter?: string[];
 }
 
 export default function QuickPlayContent(props: QuickPlayContentProps) {
   let countries = Countries;
 
-  if (props.countriesFilter) {
-    console.log('props.countriesFilter:', props.countriesFilter);
+  if (props.countriesFilter && props.countriesFilter.length > 0) {
+    countries = countries.filter(country => {
+
+      let found = "";
+      props.countriesFilter?.forEach(item => {
+        if (item.includes(country.region.toLowerCase())) found = item;
+      });
+      
+      return found;
+    });
   }
 
   const randNum = Math.floor(Math.random() * countries.length);
@@ -54,12 +62,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
     setIsSubmitDisabled(true);
   };
   
-  useEffect(() => {
-    console.group('%c   ', 'background:limegreen')
-    console.log('correctAnswers:', correctAnswers)
-    console.log('totalAnswers:', totalAnswers)
-    console.groupEnd()
-  }, [totalAnswers])
+  useEffect(() => {}, [totalAnswers])
 
   return (
     <Stack pt="5em" pb="4em">
