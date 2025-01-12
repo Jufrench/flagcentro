@@ -7,8 +7,20 @@ import FlagDisplay from "../FlagDisplay";
 import AnswerEvalAlert from "../AnswerEvalAlert";
 import NextButton from "../NextButton";
 
-export default function QuickPlayContent() {
+interface QuickPlayContentProps {
+  /**
+   * How to filter the countries. If no value passed, all are used.
+   */
+  countriesFilter?: string;
+}
+
+export default function QuickPlayContent(props: QuickPlayContentProps) {
   let countries = Countries;
+
+  if (props.countriesFilter) {
+    console.log('props.countriesFilter:', props.countriesFilter);
+  }
+
   const randNum = Math.floor(Math.random() * countries.length);
   
   const [activeCountry, setActiveCountry] = useState<any | null>(countries[randNum]);
