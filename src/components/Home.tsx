@@ -24,7 +24,7 @@ export default function Home() {
                 setActiveRegions([...activeRegions, region])
               }
 
-              console.log('%cTODO: make this more efficient', 'background:goldenrod')
+              console.log('%cTODO: make regions more efficient', 'background:goldenrod')
               if (activeRegions.includes(region)) {
                 const updatedRegions = activeRegions.filter(activeItem => activeItem !== region);
                 setActiveRegions([...updatedRegions]);
@@ -40,16 +40,23 @@ export default function Home() {
       <Stack>
         <Card shadow="md">
           <Stack>
-            <Title order={4}>Standard Quick Play</Title>
-            <Text>Test your knowledge of all flags of the world.</Text>
-            <Button onClick={open}>Start Quickplay</Button>
+            <Stack gap={1}>
+              <Title order={4}>Standard Quick Play</Title>
+              <Text>Test your knowledge of all flags of the world.</Text>
+            </Stack>
+            <Button onClick={() => {
+              setActiveRegions([]);
+              open();
+            }}>Start Quickplay</Button>
           </Stack>
         </Card>
 
         <Card shadow="md">
           <Stack>
-            <Title order={4}>Region Quick Play</Title>
-            <Text>Test by region</Text>
+            <Stack gap={0}>
+              <Title order={4}>Region Quick Play</Title>
+              <Text>By multiple regions or subregions</Text>
+            </Stack>
             <Group>
               <RegionsButtons />
             </Group>
