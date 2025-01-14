@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Group, Stack, TextInput } from "@mantine/core";
+import { Alert, Button, Group, Radio, Stack, TextInput } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 
 import Countries from "../../assets/countries.json";
@@ -12,6 +12,10 @@ interface QuickPlayContentProps {
    * How to filter the countries. If no value passed, all are used.
    */
   countriesFilter?: string[];
+  /**
+   * If true, answers will be in multiple choice form.
+   */
+  isMultChoice: boolean;
 }
 
 export default function QuickPlayContent(props: QuickPlayContentProps) {
@@ -64,6 +68,44 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   
   useEffect(() => {}, [totalAnswers])
 
+  const generateRandNums = () => {
+    let numsArr = [];
+    while (numsArr.length !== 3) {
+      let num = Math.floor(Math.random() * countries.length);
+      let isDuplicate = false;
+
+      numsArr.forEach(item => {
+        if (item === num) isDuplicate = true;
+      });
+      if (isDuplicate) continue;
+
+      numsArr.push(num);
+    }
+
+    return numsArr;
+  };
+
+  const shuffle = (arr: any[]) => {
+    let currentIndex = arr.length;
+
+    while (currentIndex != 0) {
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [arr[currentIndex], arr[randomIndex]] = [
+      arr[randomIndex], arr[currentIndex]];
+    }
+  };
+
+  const randomNumbers = generateRandNums();
+  const multChoiceAnswers = [
+    activeCountry,
+    countries[randomNumbers[0]],
+    countries[randomNumbers[1]],
+    countries[randomNumbers[2]]
+  ];
+  shuffle(multChoiceAnswers);
+
   return (
     <Stack pt="5em" pb="4em">
       <FlagDisplay activeCountry={activeCountry} />
@@ -80,6 +122,13 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
         placeholder="Country Name"
         value={userAnswer}
         withAsterisk />
+      <Alert color="orange" title="Multiple choice answering not yet functional" />
+      <Group>
+        <Radio p={4} label={multChoiceAnswers[0].name} style={{ flexBasis: "40%" }} />
+        <Radio p={4} label={multChoiceAnswers[1].name} style={{ flexBasis: "40%" }} />
+        <Radio p={4} label={multChoiceAnswers[2].name} style={{ flexBasis: "40%" }} />
+        <Radio p={4} label={multChoiceAnswers[3].name} style={{ flexBasis: "40%" }} />
+      </Group>
       <Group>
         <NextButton handleNextCountry={handleNextCountry} />
         <Button
