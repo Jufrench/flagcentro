@@ -15,7 +15,7 @@ interface QuickPlayContentProps {
   /**
    * If true, answers will be in multiple choice form.
    */
-  isMultChoice: boolean;
+  isMultChoice?: boolean;
 }
 
 export default function QuickPlayContent(props: QuickPlayContentProps) {
