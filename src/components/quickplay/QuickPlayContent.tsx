@@ -47,7 +47,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   const [unseenCountries, setUnseenCountries] = useState<any[]>(countries);
 
   const handleNextCountry = () => {
-    setActiveCountry(countries[randNum]);
+    setActiveCountry(unseenCountries[randNum]);
     setUserAnswer("");
     setShowAnswerEval(false);
     setIsSubmitDisabled(false);
