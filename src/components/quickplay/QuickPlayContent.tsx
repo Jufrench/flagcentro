@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Alert, Button, Group, Radio, Stack, TextInput } from "@mantine/core";
+import { Button, Group, Stack, TextInput } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 
 import Countries from "../../assets/countries.json";
 import FlagDisplay from "../FlagDisplay";
 import AnswerEvalAlert from "../AnswerEvalAlert";
 import NextButton from "../NextButton";
+import MultipleChoiceRadio from "./MultipleChoiceRadio";
 
 interface QuickPlayContentProps {
   /**
@@ -15,11 +16,11 @@ interface QuickPlayContentProps {
   /**
    * If true, answers will be in multiple choice form.
    */
-  isMultChoice?: boolean;
+  quickPlayType: string;
 }
 
 export default function QuickPlayContent(props: QuickPlayContentProps) {
-  let countries = Countries;
+  let countries = [...Countries];
 
   if (props.countriesFilter && props.countriesFilter.length > 0) {
     countries = countries.filter(country => {
@@ -42,6 +43,8 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(false);
   const [totalAnswers, setTotalAnswers] = useState<number>(0);
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
+  const [seenCountries, setSeenCountries] = useState<any[]>([]);
+  const [unseenCountries, setUnseenCountries] = useState<any[]>(countries);
 
   const handleNextCountry = () => {
     setActiveCountry(countries[randNum]);
@@ -51,6 +54,16 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
 
     const activeCountryIndex = countries.findIndex(country => activeCountry.name === country.name);
     countries.splice(activeCountryIndex, 1);
+
+    setSeenCountries(prevSeen => [...prevSeen, activeCountry]);
+
+    setUnseenCountries(prevUnseen => prevUnseen.filter(item => {
+      if (item.name === activeCountry.name) {
+        console.log('item.name:', item.name)
+        console.log('activeCountry.name:', activeCountry.name)
+      }
+      return item.name !== activeCountry.name;
+    }));
   };
 
   const handleSubmitAnswer = () => {
@@ -65,46 +78,20 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
     setShowAnswerEval(true);
     setIsSubmitDisabled(true);
   };
+
+  const handleSetUserAnswer = (answer: string) => {
+    setUserAnswer(answer);
+  };
   
-  useEffect(() => {}, [totalAnswers])
+  useEffect(() => {}, [totalAnswers]);
 
-  const generateRandNums = () => {
-    let numsArr = [];
-    while (numsArr.length !== 3) {
-      let num = Math.floor(Math.random() * countries.length);
-      let isDuplicate = false;
+  console.group('%cQuickPlayContent:', 'background:tomato');
+  console.log('seenCountries:', seenCountries);
+  console.log('unseenCountries:', unseenCountries);
+  console.groupEnd()
 
-      numsArr.forEach(item => {
-        if (item === num) isDuplicate = true;
-      });
-      if (isDuplicate) continue;
-
-      numsArr.push(num);
-    }
-
-    return numsArr;
-  };
-
-  const shuffle = (arr: any[]) => {
-    let currentIndex = arr.length;
-
-    while (currentIndex != 0) {
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      [arr[currentIndex], arr[randomIndex]] = [
-      arr[randomIndex], arr[currentIndex]];
-    }
-  };
-
-  const randomNumbers = generateRandNums();
-  const multChoiceAnswers = [
-    activeCountry,
-    countries[randomNumbers[0]],
-    countries[randomNumbers[1]],
-    countries[randomNumbers[2]]
-  ];
-  shuffle(multChoiceAnswers);
+  console.log('%ctry getting the index of the active country and adding the index to a filteedr out list when going to the next country', 'color:tomato')
+  console.log('should consider whether multiple choice component should handle render it\'s own answers or not');
 
   return (
     <Stack pt="5em" pb="4em">
@@ -116,19 +103,18 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
           <span><span>{correctAnswers}</span><span>/</span><span>{totalAnswers}</span></span>
         </Group>
       </Group>
-      <TextInput
-        style={{ fontSize: "16px" }}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(event.target.value)}
-        placeholder="Country Name"
-        value={userAnswer}
-        withAsterisk />
-      <Alert color="orange" title="Multiple choice answering not yet functional" />
-      <Group>
-        <Radio p={4} label={multChoiceAnswers[0].name} style={{ flexBasis: "40%" }} />
-        <Radio p={4} label={multChoiceAnswers[1].name} style={{ flexBasis: "40%" }} />
-        <Radio p={4} label={multChoiceAnswers[2].name} style={{ flexBasis: "40%" }} />
-        <Radio p={4} label={multChoiceAnswers[3].name} style={{ flexBasis: "40%" }} />
-      </Group>
+      {props.quickPlayType === "standard" &&
+        <TextInput
+          style={{ fontSize: "16px" }}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(event.target.value)}
+          placeholder="Country Name"
+          value={userAnswer}
+          withAsterisk />}
+      {props.quickPlayType === "multiple" &&
+        <MultipleChoiceRadio
+          activeCountry={activeCountry}
+          handleSetUserAnswer={handleSetUserAnswer}
+          />}
       <Group>
         <NextButton handleNextCountry={handleNextCountry} />
         <Button

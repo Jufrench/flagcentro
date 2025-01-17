@@ -10,17 +10,19 @@ import RegionQuickCard from "./quickplay/RegionQuickCard";
 export default function Home() {
   const [opened, { open, close }] = useDisclosure(false);
   const [activeRegions, setActiveRegions] = useState<string[]>([]);
+  const [quickPlayType, setQuickPlayType] = useState<string>("standard");
 
   const handleSetRegions = (regions_param: string[]) => setActiveRegions(regions_param);
+  const handleSetQuickplayType = (type: string) => setQuickPlayType(type);
 
   return (
     <>
       <Stack>
-        <StandardQuickCard open={open} handleSetRegions={handleSetRegions} />
+        <StandardQuickCard open={open} handleSetRegions={handleSetRegions} handleSetQuickplayType={handleSetQuickplayType} />
         <RegionQuickCard open={open} activeRegions={activeRegions} handleSetRegions={handleSetRegions} />
       </Stack>
       <QuickPlayModalWrapper opened={opened} onClose={close} title="Quick Play">
-        <QuickPlayContent countriesFilter={activeRegions} />
+        <QuickPlayContent quickPlayType={quickPlayType} countriesFilter={activeRegions} />
       </QuickPlayModalWrapper>
     </>
   )

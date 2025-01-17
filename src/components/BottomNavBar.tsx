@@ -21,7 +21,7 @@ export default function BottomNavBar() {
         <NavLink to="/profile" end><ActionIcon size="xl" variant="light"><IconUser /></ActionIcon></NavLink>
       </Group>
       <QuickPlayModalWrapper opened={opened} onClose={close} title="Quick Play">
-        <QuickPlayContent />
+        <QuickPlayContent quickPlayType="standard" />
       </QuickPlayModalWrapper>
     </>
   )
