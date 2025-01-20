@@ -17,8 +17,6 @@ export default function Search() {
 
   const regions = [ 'africa', 'americas', 'asia', 'europe', 'oceania' ];
 
-  console.log('activeRegion:', activeRegion)
-
   return (
     <Stack gap="sm">
       <div>

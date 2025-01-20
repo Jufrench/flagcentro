@@ -54,12 +54,6 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
     setIsSubmitDisabled(false);
 
     const activeCountryIndex = countries.findIndex(country => activeCountry.name === country.name);
-    console.group('%c     ', 'background:goldenrod')
-    console.log('unseenCountries:', unseenCountries)
-    console.log('randNum', randNum)
-    console.log('//// randCountry:', randCountry)
-    console.log('activeCountryIndex:', activeCountryIndex)
-    console.groupEnd()
     
     countries.splice(activeCountryIndex, 1);
 
@@ -89,14 +83,10 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   
   useEffect(() => {}, [totalAnswers]);
 
-  console.group('%cQuickPlayContent:', 'background:tomato');
-  console.log('seenCountries:', seenCountries);
-  console.log('unseenCountries:', unseenCountries);
-  console.log('activeCountry:', activeCountry);
-  console.groupEnd()
+  console.log('%ctry getting the index of the active country and adding the index to a filtered out list when going to the next country', 'color:tomato')
 
-  console.log('%ctry getting the index of the active country and adding the index to a filteedr out list when going to the next country', 'color:tomato')
-  console.log('should consider whether multiple choice component should handle render it\'s own answers or not');
+  // TODO:
+  // should consider whether multiple choice component should handle rendering it\'s own answers or not
 
   return (
     <Stack pt="5em" pb="4em">

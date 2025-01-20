@@ -29,7 +29,7 @@ export default function MultipleChoiceRadio(props: MultipleChoiceRadioProps) {
     let numsArr = [];
     while (numsArr.length !== 3) {
       let num = Math.floor(Math.random() * countries.length);
-      console.log('let num = Math.floor(Math.random() * props.unseenCountries.length);')
+      // let num = Math.floor(Math.random() * props.unseenCountries.length);
       let isDuplicate = false;
 
       numsArr.forEach(item => {
@@ -59,21 +59,8 @@ export default function MultipleChoiceRadio(props: MultipleChoiceRadioProps) {
     return generateRandNums();
   }, [props.activeCountry]);
 
-  console.log("TODO: make this run just once, probably using useMemo()");
-  console.log(
-    `const multiChoiceAnswers = [
-    props.activeCountry,
-    props.unseenCountries[randomNumbers[0]],
-    props.unseenCountries[randomNumbers[1]],
-    props.unseenCountries[randomNumbers[2]]
-  ];`
-  )
-  // const multiChoiceAnswers = [
-  //   props.activeCountry,
-  //   countries[randomNumbers[0]],
-  //   countries[randomNumbers[1]],
-  //   countries[randomNumbers[2]]
-  // ];
+  // TODO: make this run just once, probably using useMemo();
+
   const multiChoiceAnswers = [
     props.activeCountry,
     countries[randomNumbers[0]],
@@ -91,9 +78,7 @@ export default function MultipleChoiceRadio(props: MultipleChoiceRadioProps) {
       value={userAnswer}
       onChange={(newValue: string) => {
         setUserAnswer(newValue);
-        if (props.handleSetUserAnswer) {
-          props.handleSetUserAnswer(newValue);
-        }
+        if (props.handleSetUserAnswer) props.handleSetUserAnswer(newValue);
       }}>
       <Group>
         <Radio p={4} label={multiChoiceAnswers[0].name} value={multiChoiceAnswers[0].name} style={{ flexBasis: "40%" }} />

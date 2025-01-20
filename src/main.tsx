@@ -15,9 +15,3 @@ createRoot(document.getElementById('root')!).render(
     </MantineProvider>
   </StrictMode>,
 )
-
-document.addEventListener("DOMContentLoaded", function() {
-  document.addEventListener("touchmove", () => {
-    console.log('%cHELLO', 'color:tomato')
-  })
-});
