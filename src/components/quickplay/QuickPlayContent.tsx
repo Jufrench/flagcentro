@@ -44,7 +44,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(false);
   const [totalAnswers, setTotalAnswers] = useState<number>(0);
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
-  const [seenCountries, setSeenCountries] = useState<any[]>([]);
+  const [/* seenCountries */, setSeenCountries] = useState<any[]>([]);
 
   const handleNextCountry = () => {
     const randCountry = unseenCountries[randNum];
@@ -77,9 +77,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
     setIsSubmitDisabled(true);
   };
 
-  const handleSetUserAnswer = (answer: string) => {
-    setUserAnswer(answer);
-  };
+  const handleSetUserAnswer = (answer: string) => setUserAnswer(answer);
   
   useEffect(() => {}, [totalAnswers]);
 
