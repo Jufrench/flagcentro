@@ -47,12 +47,18 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   const [unseenCountries, setUnseenCountries] = useState<any[]>(countries);
 
   const handleNextCountry = () => {
-    setActiveCountry(unseenCountries[randNum]);
+    const randCountry = unseenCountries[randNum];
+    setActiveCountry(randCountry);
     setUserAnswer("");
     setShowAnswerEval(false);
     setIsSubmitDisabled(false);
 
     const activeCountryIndex = countries.findIndex(country => activeCountry.name === country.name);
+    console.group('%c     ', 'background:goldenrod')
+    console.log('//// randCountry:', randCountry)
+    console.log('activeCountryIndex:', activeCountryIndex)
+    console.groupEnd()
+    
     countries.splice(activeCountryIndex, 1);
 
     setSeenCountries(prevSeen => [...prevSeen, activeCountry]);
