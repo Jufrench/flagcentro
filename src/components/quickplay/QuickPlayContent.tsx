@@ -34,7 +34,9 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
     });
   }
 
-  const randNum = Math.floor(Math.random() * countries.length);
+  console.log('bug--// const randNum = Math.floor(Math.random() * countries.length);');
+  const [unseenCountries, setUnseenCountries] = useState<any[]>(countries);
+  const randNum = Math.floor(Math.random() * unseenCountries.length);
   
   const [activeCountry, setActiveCountry] = useState<any | null>(countries[randNum]);
   const [userAnswer, setUserAnswer] = useState<string>("");
@@ -44,7 +46,6 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   const [totalAnswers, setTotalAnswers] = useState<number>(0);
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
   const [seenCountries, setSeenCountries] = useState<any[]>([]);
-  const [unseenCountries, setUnseenCountries] = useState<any[]>(countries);
 
   const handleNextCountry = () => {
     const randCountry = unseenCountries[randNum];
@@ -55,6 +56,8 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
 
     const activeCountryIndex = countries.findIndex(country => activeCountry.name === country.name);
     console.group('%c     ', 'background:goldenrod')
+    console.log('unseenCountries:', unseenCountries)
+    console.log('randNum', randNum)
     console.log('//// randCountry:', randCountry)
     console.log('activeCountryIndex:', activeCountryIndex)
     console.groupEnd()
