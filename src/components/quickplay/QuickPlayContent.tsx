@@ -34,7 +34,6 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
     });
   }
 
-  console.log('bug--// const randNum = Math.floor(Math.random() * countries.length);');
   const [unseenCountries, setUnseenCountries] = useState<any[]>(countries);
   const randNum = Math.floor(Math.random() * unseenCountries.length);
   
@@ -67,10 +66,6 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
     setSeenCountries(prevSeen => [...prevSeen, activeCountry]);
 
     setUnseenCountries(prevUnseen => prevUnseen.filter(item => {
-      if (item.name === activeCountry.name) {
-        console.log('item.name:', item.name)
-        console.log('activeCountry.name:', activeCountry.name)
-      }
       return item.name !== activeCountry.name;
     }));
   };

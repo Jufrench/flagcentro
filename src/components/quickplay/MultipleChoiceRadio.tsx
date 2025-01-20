@@ -68,6 +68,12 @@ export default function MultipleChoiceRadio(props: MultipleChoiceRadioProps) {
     props.unseenCountries[randomNumbers[2]]
   ];`
   )
+  // const multiChoiceAnswers = [
+  //   props.activeCountry,
+  //   countries[randomNumbers[0]],
+  //   countries[randomNumbers[1]],
+  //   countries[randomNumbers[2]]
+  // ];
   const multiChoiceAnswers = [
     props.activeCountry,
     countries[randomNumbers[0]],
