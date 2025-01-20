@@ -88,6 +88,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   console.group('%cQuickPlayContent:', 'background:tomato');
   console.log('seenCountries:', seenCountries);
   console.log('unseenCountries:', unseenCountries);
+  console.log('activeCountry:', activeCountry);
   console.groupEnd()
 
   console.log('%ctry getting the index of the active country and adding the index to a filteedr out list when going to the next country', 'color:tomato')

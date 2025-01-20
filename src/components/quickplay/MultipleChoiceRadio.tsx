@@ -29,6 +29,7 @@ export default function MultipleChoiceRadio(props: MultipleChoiceRadioProps) {
     let numsArr = [];
     while (numsArr.length !== 3) {
       let num = Math.floor(Math.random() * countries.length);
+      console.log('let num = Math.floor(Math.random() * props.unseenCountries.length);')
       let isDuplicate = false;
 
       numsArr.forEach(item => {
@@ -59,6 +60,14 @@ export default function MultipleChoiceRadio(props: MultipleChoiceRadioProps) {
   }, [props.activeCountry]);
 
   console.log("TODO: make this run just once, probably using useMemo()");
+  console.log(
+    `const multiChoiceAnswers = [
+    props.activeCountry,
+    props.unseenCountries[randomNumbers[0]],
+    props.unseenCountries[randomNumbers[1]],
+    props.unseenCountries[randomNumbers[2]]
+  ];`
+  )
   const multiChoiceAnswers = [
     props.activeCountry,
     countries[randomNumbers[0]],
@@ -68,7 +77,7 @@ export default function MultipleChoiceRadio(props: MultipleChoiceRadioProps) {
 
   useEffect(() => {
     shuffle(multiChoiceAnswers);
-    console.log('do you need use effect here?')
+    console.log('%cdo you need use effect here? - always putting the answer first as the first option', 'background:tomato')
   }, [props.activeCountry])
 
   return (
