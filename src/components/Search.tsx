@@ -1,4 +1,4 @@
-import { Button, Card, Group, Image, SimpleGrid, Stack, Text, TextInput, Title } from "@mantine/core";
+import { Button, Group, Image, Paper, SimpleGrid, Stack, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
 
 import Countries from "../assets/countries.json";
@@ -44,7 +44,7 @@ export default function Search() {
           )
         })}
       </Group>
-      <SimpleGrid cols={3}>
+      <SimpleGrid cols={2}>
         {foundCoutnries.map((country: any) => {
           return (
             // <div key={country.name}>
@@ -54,14 +54,20 @@ export default function Search() {
             //   }}>{country.name}</Text>
             //   <Image src={country.flags.png} alt={country.flags.alt} />
             // </div>
-            <Card key={country.name} withBorder>
-              <Title order={4} style={{ background: "#fff", color: "#000" }}>
+            // <Card key={country.name} withBorder>
+            //   <Text size="md" style={{ background: "#fff", color: "#000" }}>
+            //     {country.name}
+            //   </Text>
+            //   <Card.Section>
+            //     <Image src={country.flags.png} alt={country.flags.alt} />
+            //   </Card.Section>
+            // </Card>
+            <Paper key={country.name} withBorder>
+              <Text size="md" pb="xs" style={{ background: "#fff", color: "#000" }}>
                 {country.name}
-              </Title>
-              <Card.Section>
-                <Image src={country.flags.png} alt={country.flags.alt} />
-              </Card.Section>
-            </Card>
+              </Text>
+              <Image src={country.flags.png} alt={country.flags.alt} />
+            </Paper>
           )
         })}
       </SimpleGrid>
