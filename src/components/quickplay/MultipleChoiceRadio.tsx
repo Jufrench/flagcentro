@@ -68,6 +68,44 @@ export default function MultipleChoiceRadio(props: MultipleChoiceRadioProps) {
     countries[randomNumbers[2]]
   ];
 
+  
+  // TESTING 
+
+  // get random number between 0 & 3 (matches indices of array w/ 4 items)
+  const randNum = useMemo(() => {
+    return Math.floor(Math.random() * 3);
+  }, [props.activeCountry]);
+
+  // Create array to hold multiple choices
+  const choicesArray = [];
+  
+  // make a copy of the random numbers array to avoid empty
+  // lookups when shifting on the array
+  const randomNumbersCopy = [...randomNumbers];
+
+  // loop through the array
+  for (let i = 0; i < 4; i++) {
+    // if an index matches the random number,
+    // assign that index to the active country & continue to next index
+    if (i === randNum) {
+      choicesArray[i] = props.activeCountry;
+      continue;
+    }
+
+    // const firstElement = randomNumbers.shift();
+    // Get the first element of the copied random numbers array
+    const firstElement = randomNumbersCopy.shift();
+
+    // Add the first element of the random numbers array to the choices array
+    // Remove that first element - when looping again there will be one less item
+    if (firstElement) choicesArray[i] = countries[firstElement];
+  }
+  
+  TODO:
+  // for the random order or answers - on component rerender generate a new random number between 0 and 3
+  // then loop through 0 - 3
+  // during the loop, add array items based on the index. if the index in the loop matches the randomly generated number, skip (continue) to the next item
+
   useEffect(() => {
     shuffle(multiChoiceAnswers);
     console.log('%cdo you need use effect here? - always putting the answer first as the first option', 'background:tomato')
@@ -81,10 +119,14 @@ export default function MultipleChoiceRadio(props: MultipleChoiceRadioProps) {
         if (props.handleSetUserAnswer) props.handleSetUserAnswer(newValue);
       }}>
       <Group>
-        <Radio p={4} label={multiChoiceAnswers[0].name} value={multiChoiceAnswers[0].name} style={{ flexBasis: "40%" }} />
+        {/* <Radio p={4} label={multiChoiceAnswers[0].name} value={multiChoiceAnswers[0].name} style={{ flexBasis: "40%" }} />
         <Radio p={4} label={multiChoiceAnswers[1].name} value={multiChoiceAnswers[1].name} style={{ flexBasis: "40%" }} />
         <Radio p={4} label={multiChoiceAnswers[2].name} value={multiChoiceAnswers[2].name} style={{ flexBasis: "40%" }} />
-        <Radio p={4} label={multiChoiceAnswers[3].name} value={multiChoiceAnswers[3].name} style={{ flexBasis: "40%" }} />
+        <Radio p={4} label={multiChoiceAnswers[3].name} value={multiChoiceAnswers[3].name} style={{ flexBasis: "40%" }} /> */}
+        <Radio p={4} label={choicesArray[0].name} value={choicesArray[0].name} style={{ flexBasis: "40%" }} />
+        <Radio p={4} label={choicesArray[1].name} value={choicesArray[1].name} style={{ flexBasis: "40%" }} />
+        <Radio p={4} label={choicesArray[2].name} value={choicesArray[2].name} style={{ flexBasis: "40%" }} />
+        <Radio p={4} label={choicesArray[3].name} value={choicesArray[3].name} style={{ flexBasis: "40%" }} />
       </Group>
     </Radio.Group>
   )
