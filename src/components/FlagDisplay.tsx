@@ -18,7 +18,8 @@ export type CountryItem = {
   names: {
     en: string;
     es: string;
-  }
+  },
+  region: string;
 }
 
 export default function FlagDisplay(props: FlagDisplayProps) {

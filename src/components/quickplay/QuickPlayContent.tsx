@@ -7,6 +7,7 @@ import FlagDisplay from "../FlagDisplay";
 import AnswerEvalAlert from "../AnswerEvalAlert";
 import NextButton from "../NextButton";
 import MultipleChoiceRadio from "./MultipleChoiceRadio";
+import { AnswerHint } from "../Hint/AnswerHint";
 
 interface QuickPlayContentProps {
   /**
@@ -81,8 +82,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   
   useEffect(() => {}, [totalAnswers]);
 
-  console.log('%ctry getting the index of the active country and adding the index to a filtered out list when going to the next country', 'color:tomato')
-
+  console.log('%ctry getting the index of the active country and adding the index to a filtered out list when going to the next country', 'color:tomato');
   // TODO:
   // should consider whether multiple choice component should handle rendering it\'s own answers or not
 
@@ -96,6 +96,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
           <span><span>{correctAnswers}</span><span>/</span><span>{totalAnswers}</span></span>
         </Group>
       </Group>
+      <AnswerHint activeCountry={activeCountry} />
       {props.quickPlayType === "standard" &&
         <TextInput
           style={{ fontSize: "16px" }}
