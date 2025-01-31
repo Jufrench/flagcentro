@@ -6,7 +6,7 @@ interface NextButtonProps {
    * Method to call when skipping country
    */
   handleNextCountry: () => void;
-  hasSubmittedAnswer: boolean;
+  hasSubmittedAnswer?: boolean;
 }
 
 export default function NextButton(props: NextButtonProps) {
