@@ -49,7 +49,7 @@ export default function RegionQuickCard(props: RegionQuickCardProps) {
     <Card shadow="md">
       <Stack>
         <Stack gap={0}>
-          <Title order={4}>Region Quick Play</Title>
+          <Title style={{ textDecoration: "underline" }} order={4}>Region Quick Play</Title>
           <Text>By multiple regions or subregions</Text>
         </Stack>
         <Group>

@@ -27,7 +27,7 @@ export default function StandardQuickCard(props: StandardQuickCardProps) {
     <Card shadow="md">
       <Stack>
         <Stack gap={1}>
-          <Title order={4}>Standard Quick Play</Title>
+          <Title style={{ textDecoration: "underline" }} order={4}>Standard Quick Play</Title>
           <Text>Test your knowledge of all flags of the world.</Text>
         </Stack>
         <Radio.Group

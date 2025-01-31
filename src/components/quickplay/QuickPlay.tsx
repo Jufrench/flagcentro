@@ -65,7 +65,7 @@ export default function QuickPlay() {
             value={userAnswer}
             withAsterisk />
           <Group>
-            <NextButton handleNextCountry={handleNextCountry} />
+            <NextButton handleNextCountry={handleNextCountry} hasSubmittedAnswer={false} />
             <Button
               disabled={userAnswer.length < 2 ? true : isSubmitDisabled}
               onClick={handleSubmitAnswer}

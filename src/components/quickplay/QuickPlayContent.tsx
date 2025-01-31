@@ -46,6 +46,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   const [totalAnswers, setTotalAnswers] = useState<number>(0);
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
   const [/* seenCountries */, setSeenCountries] = useState<any[]>([]);
+  const [hasSubmittedAnswer, setHasSubmittedAnswer] = useState<boolean>(false);
 
   const handleNextCountry = () => {
     const randCountry = unseenCountries[randNum];
@@ -59,10 +60,10 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
     countries.splice(activeCountryIndex, 1);
 
     setSeenCountries(prevSeen => [...prevSeen, activeCountry]);
-
     setUnseenCountries(prevUnseen => prevUnseen.filter(item => {
       return item.name !== activeCountry.name;
     }));
+    setHasSubmittedAnswer(false);
   };
 
   const handleSubmitAnswer = () => {
@@ -76,6 +77,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
     setTotalAnswers(prevScore => prevScore + 1);
     setShowAnswerEval(true);
     setIsSubmitDisabled(true);
+    setHasSubmittedAnswer(true);
   };
 
   const handleSetUserAnswer = (answer: string) => setUserAnswer(answer);
@@ -87,7 +89,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   // should consider whether multiple choice component should handle rendering it\'s own answers or not
 
   return (
-    <Stack pt="5em" pb="4em">
+    <Stack pb="4em">
       <FlagDisplay activeCountry={activeCountry} />
       <Group justify="flex-end">
         {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}
@@ -110,12 +112,16 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
           handleSetUserAnswer={handleSetUserAnswer}
           />}
       <Group>
-        <NextButton handleNextCountry={handleNextCountry} />
+        <NextButton
+          handleNextCountry={handleNextCountry}
+          hasSubmittedAnswer={hasSubmittedAnswer} />
         <Button
-          style={{ flexGrow: 1 }}
+          style={{ flexGrow: hasSubmittedAnswer ? 0 : 2 }}
           disabled={userAnswer.length < 2 ? true : isSubmitDisabled}
           onClick={handleSubmitAnswer}
-        ><IconCheck /></Button>
+        >
+          <IconCheck />
+        </Button>
       </Group>
     </Stack>
   )
