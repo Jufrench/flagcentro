@@ -11,7 +11,16 @@ export default function MobileHeader() {
   let location = useLocation();
   let pathname = location.pathname.slice(1);
   pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
-  const displayPath = location.pathname === "/" ? "Quick Play" : pathname;
+  // const displayPath = location.pathname === "/" ? "Quick Play" : pathname;
+  // const displayPath = location.pathname === "/"
+  //   ? "Quick Play"
+  //   : location.pathname === "dailyplay" ? "Daily Play" : pathname
+  //   : pathname;
+
+  let displayPath = location.pathname;
+
+  if (location.pathname === "/") displayPath = "Quick Play";
+  if (location.pathname === "/dailyplay") displayPath = "Daily Play";
 
   return (
     <Center p="sm">

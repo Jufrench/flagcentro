@@ -48,7 +48,7 @@ export function AnswerHint(props: AnswerHintProps) {
         // }}
         >
         <Accordion.Item value="Hints" style={{ border: "none" }}>
-          <Accordion.Control pl={0}>Hints</Accordion.Control>
+          <Accordion.Control>Hints</Accordion.Control>
           <Accordion.Panel>
             <Stack gap="xs">
               {Object.keys(hints).map((key: string) => {

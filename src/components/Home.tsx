@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import QuickPlayModalWrapper from "./quickplay/QuickPlayModalWrapper";
 import QuickPlayContent from "./quickplay/QuickPlayContent";
 import StandardQuickCard from "./quickplay/StandardQuickCard";
 import RegionQuickCard from "./quickplay/RegionQuickCard";
+import DrawerWrapper from "./DrawerWrapper";
 
 export default function Home() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -21,9 +21,12 @@ export default function Home() {
         <StandardQuickCard open={open} handleSetRegions={handleSetRegions} handleSetQuickplayType={handleSetQuickplayType} />
         <RegionQuickCard open={open} activeRegions={activeRegions} handleSetRegions={handleSetRegions} />
       </Stack>
-      <QuickPlayModalWrapper opened={opened} onClose={close} title="Quick Play">
+      {/* <QuickPlayModalWrapper opened={opened} onClose={close} title="Quick Play">
         <QuickPlayContent quickPlayType={quickPlayType} countriesFilter={activeRegions} />
-      </QuickPlayModalWrapper>
+      </QuickPlayModalWrapper> */}
+      <DrawerWrapper opened={opened} onClose={close} title="Quick Play">
+        <QuickPlayContent quickPlayType={quickPlayType} countriesFilter={activeRegions} />
+      </DrawerWrapper>
     </>
   )
 }
