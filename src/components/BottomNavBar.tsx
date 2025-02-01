@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import { ActionIcon, Group } from "@mantine/core";
-import { IconBoltFilled, IconFriends, IconHomeFilled, IconSearch, IconUser } from '@tabler/icons-react';
+import { IconFriends, IconHomeFilled, IconPlayerPlayFilled, IconSearch, IconUser } from '@tabler/icons-react';
 // import { useDisclosure } from "@mantine/hooks";
 
 // import QuickPlayContent from "./quickplay/QuickPlayContent";
@@ -17,7 +17,7 @@ export default function BottomNavBar() {
         {/* <ActionIcon size="xl" onClick={open}>
           <IconBoltFilled />
         </ActionIcon> */}
-        <NavLink to="/dailyplay" end><ActionIcon size="xl" variant="light"><IconBoltFilled /></ActionIcon></NavLink>
+        <NavLink to="/dailyplay" end><ActionIcon size="xl" variant="light"><IconPlayerPlayFilled /></ActionIcon></NavLink>
         <NavLink to="/multi" end><ActionIcon size="xl" variant="light"><IconFriends /></ActionIcon></NavLink>
         <NavLink to="/profile" end><ActionIcon size="xl" variant="light"><IconUser /></ActionIcon></NavLink>
       </Group>
