@@ -7,7 +7,7 @@ import Search from './components/Search';
 import MultiPlayer from './components/MultiPlayer';
 import Profile from './components/Profile';
 import Home from './components/Home';
-import DailyPlay from './components/DailyPlay';
+import DailyPlay from './components/dailyplay/DailyPlay';
 
 function App() {
   console.log('%cGo through index.css to remove unnecessary styling', 'color:tomato');
