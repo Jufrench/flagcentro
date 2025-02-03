@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button, Stack, TextInput } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 
@@ -12,8 +12,8 @@ import NameInputs from "./NameInputs";
 export default function DailyPlay() {
   const inputRef = useRef(null);
   let countries = [...Countries];
-  // const randNum = Math.floor(Math.random() * countries.length);
-  const randNum = useMemo(() => Math.floor(Math.random() * countries.length), []);
+  const randNum = Math.floor(Math.random() * countries.length);
+  // const randNum = useMemo(() => Math.floor(Math.random() * countries.length), []);
   const country = countries[randNum];
 
   // const [userAnswer, setUserAnswer] = useState<string>("");
@@ -60,6 +60,14 @@ export default function DailyPlay() {
         onClick={handleSubmitAnswer}
       >
         <IconCheck />
+      </Button>
+      <Button
+        color="red"
+        onClick={() => {
+        }}
+        variant="light"
+      >
+        Next
       </Button>
     </Stack>
   )

@@ -5,28 +5,52 @@ interface NameInputsProps {
 }
 
 export default function NameInputs(props: NameInputsProps) {
-  console.log('props.numOfInputs', props.countryName)
   return (
-    <Group gap={1}>
+    <Group gap={1} justify="center">
       {Array.from(props.countryName).map((char: string, index: number) => {
         const key = "" + char + index;
+        console.log('%cchar:', 'background:tomato', char)
 
         return (
-          // <div>
-          <TextInput
-            key={key}
-            size="xl"
-            style={{ width: "30px" }}
-            styles={{
-              input: {
-                padding: 0,
-                textAlign: "center"
-              }
-            }}
-            />
-          // </div>
+          <>
+            {char === " "
+              ? <span style={{ width: "26px" }}>{"\xa0"}</span>
+              : <TextInput
+                  key={key}
+                  size="xl"
+                  style={{ width: "26px" }}
+                  styles={{
+                    input: {
+                      padding: 0,
+                      textAlign: "center",
+                      fontSize: "1.25em"
+                    }
+                  }}
+                />
+            }
+          </>
         )
       })}
     </Group>
   )
 }
+
+  // return (
+  //   <>
+  //     {char === ""
+  //       ? <>\xa0</>
+  //       : <TextInput
+  //           key={key}
+  //           size="xl"
+  //           style={{ width: "26px" }}
+  //           styles={{
+  //             input: {
+  //               padding: 0,
+  //               textAlign: "center",
+  //               fontSize: "1.25em"
+  //             }
+  //           }}
+  //         />
+  //     }
+  //   </>
+  // )

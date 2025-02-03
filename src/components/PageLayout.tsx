@@ -16,8 +16,8 @@ export default function PageLayout() {
   const mainStyle: {} = {
     paddingTop: "5em",
     paddingBottom: "4em",
-    paddingRight: "2em",
-    paddingLeft: "2em",
+    paddingRight: "1em",
+    paddingLeft: "1em",
   };
 
   const footerStyle: {} = {
