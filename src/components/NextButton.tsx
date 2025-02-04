@@ -14,7 +14,11 @@ export default function NextButton(props: NextButtonProps) {
   return (
     <Button
       color="red"
-      onClick={props.handleNextCountry}
+      // onClick={props.handleNextCountry}
+      onClick={() => {
+        console.log('clicked!!')
+        props.handleNextCountry()
+      }}
       // size="compact-sm"
       style={{ flexGrow: props.hasSubmittedAnswer ? 2 : 0 }}
       rightSection={<IconArrowBigRightFilled size={14} />}
