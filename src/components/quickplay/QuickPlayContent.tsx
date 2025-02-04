@@ -57,6 +57,8 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
 
     const activeCountryIndex = countries.findIndex(country => activeCountry.name === country.name);
     
+    // TODO:
+    // I don't think this does anything
     countries.splice(activeCountryIndex, 1);
 
     setSeenCountries(prevSeen => [...prevSeen, activeCountry]);
