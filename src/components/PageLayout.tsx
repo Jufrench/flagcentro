@@ -1,8 +1,14 @@
 import { Outlet } from "react-router";
 import BottomNavBar from "./BottomNavBar";
-import MobileHeader from "./MobileHeader";
+import MobileHeader from "./headers/MobileHeader";
+import DesktopHeader from "./headers/DesktopHeader";
+import DesktopFooter from "./footers/DesktopFooter";
+import { useMediaQuery } from "@mantine/hooks";
+import { em } from "@mantine/core";
 
 export default function PageLayout() {
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+
   const headerStyle: {} = {
     position: "fixed",
     top: 0,
@@ -32,13 +38,23 @@ export default function PageLayout() {
   return (
     <>
       <header id="header" style={headerStyle}>
-        <MobileHeader />
+        {isMobile
+          ?
+          <MobileHeader />
+          :
+          <DesktopHeader />
+        }
       </header>
       <main id="main" style={mainStyle}>
         <Outlet />
       </main>
       <footer id="footer" style={footerStyle}>
-        <BottomNavBar />
+        {isMobile
+          ?
+          <BottomNavBar />
+          :
+          <DesktopFooter />
+        }
       </footer>
     </>
   );

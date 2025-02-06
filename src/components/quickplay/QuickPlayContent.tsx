@@ -91,7 +91,7 @@ export default function QuickPlayContent(props: QuickPlayContentProps) {
   // should consider whether multiple choice component should handle rendering it\'s own answers or not
 
   return (
-    <Stack pb="4em">
+    <Stack pb="4em" style={{ margin: "0 auto", maxWidth: "500px" }}>
       <FlagDisplay activeCountry={activeCountry} />
       <Group justify="flex-end">
         {showAnswerEval && <AnswerEvalAlert correctCountry={activeCountry} isCorrect={answerEval} />}

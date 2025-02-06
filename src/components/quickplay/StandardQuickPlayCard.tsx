@@ -81,7 +81,7 @@ export default function StandardQuickPlayCard(props: StandardQuickCardProps) {
   };
 
   return (
-    <Card shadow="md">
+    <Card shadow="md" style={{ maxWidth: "500px", margin: "0 auto" }}>
       <Stack>
         <Stack gap={1}>
           <Title style={{ textDecoration: "underline" }} order={4}>Standard Quick Play</Title>

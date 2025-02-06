@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
-import { Button, Stack, TextInput } from "@mantine/core";
-import { IconCheck } from "@tabler/icons-react";
+import { Alert, Button, Stack, TextInput } from "@mantine/core";
+import { IconBarrierBlock, IconCheck } from "@tabler/icons-react";
 
 
 import FlagDisplay from "../FlagDisplay";
@@ -33,11 +33,10 @@ export default function DailyPlay() {
     setHasSubmittedAnswer(true);
     console.log('inputRef:', inputRef)
   };
-
-  // console.log('inputRef:', inputRef)
   
   return (
-    <Stack>
+    <Stack style={{ margin: "0 auto", maxWidth: "500px" }}>
+      <Alert variant="filled" color="red" title="Under Construction" icon={<IconBarrierBlock />}>This page is currently under constuction.</Alert>
       <FlagDisplay activeCountry={country} />
       <AnswerHint activeCountry={country} />
       <NameInputs countryName={country.name} />

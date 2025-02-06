@@ -2,7 +2,7 @@ import { Burger, Center, Text, useMantineTheme } from "@mantine/core";
 import { useDisclosure } from '@mantine/hooks';
 import { useLocation } from 'react-router'
 
-import SettingsDrawer from "./SettingsDrawer";
+import SettingsDrawer from "../SettingsDrawer";
 
 export default function MobileHeader() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -21,6 +21,9 @@ export default function MobileHeader() {
 
   if (location.pathname === "/") displayPath = "Quick Play";
   if (location.pathname === "/dailyplay") displayPath = "Daily Play";
+  if (location.pathname === "/search") displayPath = "Search";
+  if (location.pathname === "/multi") displayPath = "Multi Player";
+  if (location.pathname === "/profile") displayPath = "Profile";
 
   return (
     <Center p="sm">

@@ -18,7 +18,7 @@ export default function Search() {
   const regions = [ 'africa', 'americas', 'asia', 'europe', 'oceania' ];
 
   return (
-    <Stack gap="sm">
+    <Stack gap="sm" style={{ margin: "0 auto", maxWidth: "500px" }}>
       <div>
         <Text>Search for a Country</Text>
         <TextInput
