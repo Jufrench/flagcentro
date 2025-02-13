@@ -102,7 +102,7 @@ export default function Home() {
         >
           <Title ta="center" mb="lg" order={3}>Welcome to Flag Centro!</Title>
           <List mb="4em" withPadding>
-            <List.Item>Challenge your knowledge of flags once daily</List.Item>
+            <List.Item>Challenge your knowledge of flags daily</List.Item>
             <List.Item>Guesses are limited</List.Item>
             <List.Item>Sign up to access more features</List.Item>
           </List>
