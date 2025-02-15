@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button, Checkbox, List, Modal, Stack, Title } from "@mantine/core";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 
@@ -7,10 +7,14 @@ import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 // import RegionQuickCard from "./quickplay/RegionQuickCard";
 // import DrawerWrapper from "./DrawerWrapper";
 import DailyPlayBanner from "./dailyplay/DailyPlayBanner";
-import { useState } from "react";
-// import QuickPlayModalWrapper from "./quickplay/QuickPlayModalWrapper";
+import TodayStatsBanner from "./dailyplay/TodayStatsBanner";
+import Countries from "./../assets/countries.json";
 
 export default function Home() {
+  let countries = [...Countries];
+  const randNum = useMemo(() => Math.floor(Math.random() * countries.length), []);
+  const activeCountry = useMemo(() => countries[randNum], []);
+  // const [activeCountry, setActiveCountry] = useState<any | null>(countries[randNum]);
   // const [hasLocalStorage, setHasLocalStorage] = useState<boolean>(false);
   // const [showWelcomeModal, setShowWelcomeModal] = useLocalStorage<boolean>({
   //   key: 'show_welcome_modal',
@@ -78,7 +82,8 @@ export default function Home() {
   return (
     <>
       <Stack>
-        <DailyPlayBanner />
+        <DailyPlayBanner activeCountry={activeCountry} />
+        <TodayStatsBanner activeCountry={activeCountry} />
         {/* <StandardQuickPlayCard
           activeRegions={activeRegions}
           open={open}
@@ -128,6 +133,8 @@ export default function Home() {
  * Add content to the homepage
  * 
  * -- DAILY PLAY
+ * Make component for daily play different than quickplay so that
+ *   TodayStatsBanner & DailyPlayBanner can share the same active country
  * Use cookies/session storage to check if a use has played daily play
  * Update daily play (quickplaycontent) to use spaces like in DailyPlay.tsx
  * 

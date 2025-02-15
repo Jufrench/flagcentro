@@ -1,10 +1,17 @@
 import { Button, Group, Paper, Stack, Text, Title } from "@mantine/core";
 import { IconSunFilled } from "@tabler/icons-react";
-import DrawerWrapper from "../DrawerWrapper";
-import QuickPlayContent from "../quickplay/QuickPlayContent";
 import { useDisclosure } from "@mantine/hooks";
 
-export default function DailyPlayBanner() {
+import DrawerWrapper from "../DrawerWrapper";
+// import QuickPlayContent from "../quickplay/QuickPlayContent";
+import { CountryItem } from "../FlagDisplay";
+import DailyPlayContent from "./DailyPlayContent";
+
+interface DailyPlayBannerProps {
+  activeCountry: CountryItem;
+}
+
+export default function DailyPlayBanner(props: DailyPlayBannerProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -15,15 +22,18 @@ export default function DailyPlayBanner() {
           <IconSunFilled color="orange" />
           <Title order={3}>Daily Play</Title>
         </Group>
-        <Text>Test your flag knowledge once a day! (temporarily unlimited)</Text>
-        <Button onClick={open}>
+        <Text ta="center">Test your flag knowledge once a day! (temporarily unlimited)</Text>
+        <Button onClick={open} size="md">
           Play
         </Button>
       </Stack>
     </Paper>
     <DrawerWrapper opened={opened} onClose={close} title="Daily Play">
       {/* <QuickPlayContent quickPlayType={quickPlayType} countriesFilter={activeRegions} /> */}
-      <QuickPlayContent quickPlayType={"standard"} />
+      <>
+      {/* <QuickPlayContent quickPlayType={"standard"} /> */}
+      <DailyPlayContent activeCountry={props.activeCountry} />
+      </>
     </DrawerWrapper>
     </>
   )
