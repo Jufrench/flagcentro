@@ -39,7 +39,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     <Stack pb="4em" style={{ margin: "0 auto", maxWidth: "500px" }}>
       <FlagDisplay activeCountry={props.activeCountry} />
       {/* <Keyboard letters={qwertyEnglish} /> */}
-      <Keyboard language="spanish" letters={letters} />
+      <Keyboard language="english" letters={letters} />
     </Stack>
   )
 }
