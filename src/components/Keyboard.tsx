@@ -1,4 +1,4 @@
-import { Button, Group, Stack } from "@mantine/core";
+import { Button, Divider, Group, Stack } from "@mantine/core";
 // import { useMediaQuery } from "@mantine/hooks";
 import { IconBackspace, IconChecks } from "@tabler/icons-react";
 
@@ -37,7 +37,7 @@ export default function Keyboard(props: KeyboardProps) {
                 <Button
                   size="compact-xl"
                   style={{
-                    padding: "0 6px",
+                    padding: "0 10px",
                     minWidth: "31px",
                   }}
                 >
@@ -51,6 +51,7 @@ export default function Keyboard(props: KeyboardProps) {
           </Group>
         );
       })}
+      <Divider size="xs" w={100} />
       <Button fullWidth rightSection={<IconChecks />}>SUBMIT</Button>
     </Stack>
   )
