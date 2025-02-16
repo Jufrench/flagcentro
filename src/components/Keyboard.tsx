@@ -1,4 +1,5 @@
 import { Button, Group, Stack } from "@mantine/core";
+// import { useMediaQuery } from "@mantine/hooks";
 import { IconBackspace, IconChecks } from "@tabler/icons-react";
 
 interface KeyboardProps {
@@ -12,45 +13,45 @@ interface KeyboardProps {
 }
 
 export default function Keyboard(props: KeyboardProps) {
+  // const matches = useMediaQuery('(max-width: 319px)');
   // const language: 'english' | 'spanish' = 'english';
   const language = props.language ?? "english";
 
   console.log('props', props.letters.english)
 
   return (
-    // <>hello</>
-    <Stack gap="md" >
+    <Stack gap="xs" align="center">
       {props.letters[language].map((row: any, index: number) => {
         return (
-          <Group
-            gap={((index === 0 && language === 'spanish') ? 4 : 0)}
-            justify={(index === 0 && language === 'spanish') ? 'flex-start' : 'space-between'}
-            // style={{
-            //   width: index === 1 ? "95%" : "100%"
-            // }}
-          >
+          <Group gap={3}>
             {index === props.letters[language].length - 1 &&
-              <Button size="compact-xl"><IconBackspace /></Button>
+              <Button
+                size="compact-xl"
+              >
+                <IconBackspace />
+              </Button>
             }
-            {row.map((letter: string) => {
+            {row.map((letter: string, index: number) => {
+              console.log("row[letter]", index)
               return (
                 <Button
                   size="compact-xl"
                   style={{
                     padding: "0 6px",
-                    minWidth: "30px"
+                    minWidth: "31px",
                   }}
                 >
                   {letter}
                 </Button>
               );
             })}
-            {index === props.letters[language].length - 1 &&
-              <Button size="compact-xl"><IconChecks /></Button>
-            }
+            {/* {index === props.letters[language].length - 1 &&
+              <Button ml={3} size="compact-lg"><IconChecks /></Button>
+            } */}
           </Group>
         );
       })}
+      <Button fullWidth rightSection={<IconChecks />}>SUBMIT</Button>
     </Stack>
   )
   // return (

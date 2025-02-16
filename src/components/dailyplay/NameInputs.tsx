@@ -18,7 +18,7 @@ export default function NameInputs(props: NameInputsProps) {
               : <TextInput
                   key={key}
                   size="xl"
-                  style={{ width: "26px" }}
+                  style={{ width: "26px", margin: "2px 0" }}
                   styles={{
                     input: {
                       padding: 0,

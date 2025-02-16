@@ -2,6 +2,7 @@ import { Stack } from "@mantine/core";
 
 import FlagDisplay, { CountryItem } from "../FlagDisplay";
 import Keyboard from "../Keyboard";
+import NameInputs from "./NameInputs";
 
 interface DailyPlayContentProps {
   activeCountry: CountryItem;
@@ -39,6 +40,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     <Stack pb="4em" style={{ margin: "0 auto", maxWidth: "500px" }}>
       <FlagDisplay activeCountry={props.activeCountry} />
       {/* <Keyboard letters={qwertyEnglish} /> */}
+      <NameInputs countryName={props.activeCountry.name} />
       <Keyboard language="english" letters={letters} />
     </Stack>
   )
