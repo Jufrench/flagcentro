@@ -37,7 +37,7 @@ export default function Keyboard(props: KeyboardProps) {
                 <Button
                   size="compact-xl"
                   style={{
-                    padding: "0 10px",
+                    padding: "0 8px",
                     minWidth: "31px",
                   }}
                 >
