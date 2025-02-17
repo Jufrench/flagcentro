@@ -1,4 +1,4 @@
-import { Button, Divider, Group, Stack } from "@mantine/core";
+import { Button, Group, Stack } from "@mantine/core";
 // import { useMediaQuery } from "@mantine/hooks";
 import { IconBackspace, IconChecks } from "@tabler/icons-react";
 
