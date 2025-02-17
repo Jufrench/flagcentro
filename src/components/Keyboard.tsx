@@ -51,7 +51,7 @@ export default function Keyboard(props: KeyboardProps) {
           </Group>
         );
       })}
-      <Divider size="xs" w={100} />
+      {/* <Divider size="xs" w={100} /> */}
       <Button fullWidth rightSection={<IconChecks />}>SUBMIT</Button>
     </Stack>
   )
