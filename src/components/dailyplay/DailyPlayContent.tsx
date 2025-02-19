@@ -38,14 +38,13 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     ]
   };
 
-  const [/* userLetters */, /* setUserLetters */] = useState<string>("");
-  // const [nameSpaces, setNameSpaces] = useState<string[]>([]);
   const [nameSpaces, setNameSpaces] = useState<string[][]>([]);
-  const [currentSpace, setCurrentSpace] = useState<number[]>([0, 0]);
-  // const [currentSpace, setCurrentSpace] = useState<{ word: number, letter: number}>({
-  //   word: 0,
-  //   letter: 0
-  // });
+  // const [currentSpace, setCurrentSpace] = useState<number[]>([0, 0]);
+
+  const [currentSpace, setCurrentSpace] = useState<{ word: number, position: number}>({
+    word: 0,
+    position: 0
+  });
 
   useEffect(() => {
     const tempArray: string[] = [];
@@ -65,41 +64,63 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
       );
     })
 
-    // console.log('spaces:', spaces);
-    // console.log('emptySpaces:', emptySpaces);
-
     setNameSpaces([...emptySpaces]);
   }, [props.activeCountry]);
 
-  console.log('nameSpaces:', nameSpaces)
+  console.log('%cnameSpaces:', 'color:goldenrod', nameSpaces)
+  // console.log('newNameSpaces[0].length:', nameSpaces[0].length - 1)
 
   function handleLetterClick(letter: string) {
-    // console.log('letter:', letter)
-    // setUserLetters(letter);
-    // let newNameSpaces: any = [[]];
-    // newNameSpaces[currentSpace.word][currentSpace.letter] = letter;
-    // const newLetter = nameSpaces[currentSpace.word][currentSpace.letter] = letter;
-    const newLetter = nameSpaces[currentSpace[0]][currentSpace[1]] = letter;
 
-    // console.log('newNameSpaces:', newNameSpaces);
-    // console.log('currentSpace.word:', newNameSpaces[currentSpace.word])
-    // console.log('currentSpace.letter:', newNameSpaces[currentSpace.word][currentSpace.letter])
+    const isLastWord = currentSpace.word === nameSpaces.length - 1;
+    const isLastPosition = currentSpace.position === nameSpaces[currentSpace.word].length - 1;
+
+    if (isLastWord && isLastPosition) {
+      console.log('%cDONE!', 'background:goldenrod')
+      return;
+    }
+
+    let newNameSpaces = [...nameSpaces];
+
+    // === Works with ARRAY current space
+    // === moving to next word can be tricky
+    // newNameSpaces[currentSpace[0]][currentSpace[1]] = letter;
+    // setNameSpaces(newNameSpaces);
+    // const newCurrentSpace = [0, currentSpace[1] + 1];
+    // setCurrentSpace(newCurrentSpace);
+
+    // === Works with OBJECT current space
+    newNameSpaces[currentSpace.word][currentSpace.position] = letter;
+    setNameSpaces(newNameSpaces);
+
+    // If the letter is the last index in the word, move to next word
+    if (isLastPosition) {
+      const newCurrentSpace = { word: currentSpace.word + 1, position: 0 };
+      setCurrentSpace(newCurrentSpace);
+      return;
+    }
+
+    const newCurrentSpace = { word: currentSpace.word, position: currentSpace.position + 1 };
+    setCurrentSpace(newCurrentSpace);
+
 
     // const newCurrentSpace = { word: 0, letter: currentSpace.letter + 1 };
-    const newCurrentSpace = [0, currentSpace[1] + 1];
+    // const newCurrentSpace = [0, currentSpace[1] + 1];
     // setCurrentSpace(newCurrentSpace);
     // setNameSpaces(prevState => {
     //   const newLetter = prevState[currentSpace.word][currentSpace.letter] = letter;
     //   return [...prevState]
     // });
 
-    const newNameSpaces = [ [...nameSpaces[0], newLetter]];
 
-    console.log('newNameSpaces:', newNameSpaces);
 
-    // setNameSpaces([newNameSpaces, ...newNameSpaces]);
-    setNameSpaces(newNameSpaces);
-    setCurrentSpace(newCurrentSpace);
+    const test = [[...nameSpaces[0]], [...nameSpaces[1]]]
+
+    console.group('%ctesting:', 'background:tomato')
+    console.log('test:', test)
+    console.log('newNameSpaces:', newNameSpaces)
+    console.log('newNameSpaces[0]:', newNameSpaces[0])
+    console.groupEnd()
   }
 
   return (
