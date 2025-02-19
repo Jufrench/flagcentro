@@ -24,7 +24,10 @@ export default function Keyboard(props: KeyboardProps) {
     <Stack gap="xs" align="center">
       {props.letters[language].map((row: any, index: number) => {
         return (
-          <Group gap={3}>
+          <Group
+            key={row[0] + index}
+            gap={3}
+          >
             {index === props.letters[language].length - 1 &&
               <Button
                 size="compact-xl"
@@ -32,9 +35,11 @@ export default function Keyboard(props: KeyboardProps) {
                 <IconBackspace />
               </Button>
             }
-            {row.map((letter: string) => {
+            {row.map((letter: string, index: number) => {
+              const key = letter + index;
               return (
                 <Button
+                  key={key}
                   size="compact-xl"
                   style={{
                     padding: "0 6px",

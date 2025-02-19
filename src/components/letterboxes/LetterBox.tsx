@@ -1,17 +1,17 @@
 import { Box } from "@mantine/core";
-import { useState } from "react";
+// import { useState } from "react";
 
 interface LetterBoxProps {
-  activeIndex: number;
+  // activeIndex: number;
   index: number;
   letter: string;
 }
 
 export default function LetterBox(props: LetterBoxProps) {
   // const [isActive, setIsActive] = useState();
-  const [boxChar, /* setBoxChar */] = useState<string>("");
+  // const [boxChar, /* setBoxChar */] = useState<string>("");
 
-  console.log('props.index:', props.index)
+  // console.log('props.index:', props.index)
 
   return (
     <Box
@@ -24,8 +24,8 @@ export default function LetterBox(props: LetterBoxProps) {
         textAlign: "center"
       }}
     >
-      {boxChar}
-      {/* {props.letter} */}
+      {/* {boxChar} */}
+      {props.letter}
     </Box>
   )
 }

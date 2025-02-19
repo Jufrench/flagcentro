@@ -4,7 +4,7 @@ import FlagDisplay, { CountryItem } from "../FlagDisplay";
 import Keyboard from "../Keyboard";
 // import NameInputs from "./NameInputs";
 import LetterBoxesWrap from "../letterboxes/LetterBoxesWrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface DailyPlayContentProps {
   activeCountry: CountryItem;
@@ -39,10 +39,52 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
   };
 
   const [/* userLetters */, setUserLetters] = useState<string>("");
+  // const [nameSpaces, setNameSpaces] = useState<string[]>([]);
+  const [nameSpaces, setNameSpaces] = useState<string[][]>([]);
+  // const [currentSpace, setCurrentSpace] = useState<number[]>([0, 0]);
+  const [currentSpace, setCurrentSpace] = useState<{ word: number, letter: number}>({
+    word: 0,
+    letter: 0
+  });
+
+  useEffect(() => {
+    const tempArray: string[] = [];
+    [...props.activeCountry.name].forEach(letter => {
+      if (letter === " ") return;
+      tempArray.push("");
+    })
+
+    // setNameSpaces([...tempArray]);
+
+    const spaces = props.activeCountry.name.split(" ");
+    const emptySpaces = spaces.map(word => {
+      return (
+        [...word].map(() => {
+          return "";
+        })
+      );
+    })
+
+    // console.log('spaces:', spaces);
+    // console.log('emptySpaces:', emptySpaces);
+
+    setNameSpaces([...emptySpaces]);
+  }, [props.activeCountry]);
+
+  // console.log('nameSpaces:', nameSpaces)
 
   function handleLetterClick(letter: string) {
-    console.log('letter:', letter)
+    // console.log('letter:', letter)
     setUserLetters(letter);
+    let newNameSpaces: string[][] = [[]];
+    newNameSpaces[currentSpace.word][currentSpace.letter] = letter;
+    console.log('newNameSpaces:', [newNameSpaces, ...nameSpaces])
+
+    const newCurrentSpace = { word: 0, letter: currentSpace.letter + 1 };
+    setCurrentSpace(newCurrentSpace);
+    // setNameSpaces(newNameSpaces);
+
+    // setCurrentSpace(prevSpace => prevSpace + 1);
   }
 
   return (
@@ -67,7 +109,10 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
         })}
       </Group> */}
       {/* <NameInputs countryName={props.activeCountry.name} /> */}
-      <LetterBoxesWrap countryName={props.activeCountry.name.toUpperCase()} />
+      <LetterBoxesWrap
+        countryName={props.activeCountry.name.toUpperCase()}
+        nameSpaces={nameSpaces}
+      />
       <Keyboard
         language="english"
         letters={letters}
