@@ -38,7 +38,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     ]
   };
 
-  const [/* userLetters */, setUserLetters] = useState<string>("");
+  const [/* userLetters */, /* setUserLetters */] = useState<string>("");
   // const [nameSpaces, setNameSpaces] = useState<string[]>([]);
   const [nameSpaces, setNameSpaces] = useState<string[][]>([]);
   const [currentSpace, setCurrentSpace] = useState<number[]>([0, 0]);
