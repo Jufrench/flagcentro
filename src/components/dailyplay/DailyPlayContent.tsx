@@ -41,11 +41,11 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
   const [/* userLetters */, setUserLetters] = useState<string>("");
   // const [nameSpaces, setNameSpaces] = useState<string[]>([]);
   const [nameSpaces, setNameSpaces] = useState<string[][]>([]);
-  // const [currentSpace, setCurrentSpace] = useState<number[]>([0, 0]);
-  const [currentSpace, setCurrentSpace] = useState<{ word: number, letter: number}>({
-    word: 0,
-    letter: 0
-  });
+  const [currentSpace, setCurrentSpace] = useState<number[]>([0, 0]);
+  // const [currentSpace, setCurrentSpace] = useState<{ word: number, letter: number}>({
+  //   word: 0,
+  //   letter: 0
+  // });
 
   useEffect(() => {
     const tempArray: string[] = [];
@@ -71,20 +71,35 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     setNameSpaces([...emptySpaces]);
   }, [props.activeCountry]);
 
-  // console.log('nameSpaces:', nameSpaces)
+  console.log('nameSpaces:', nameSpaces)
 
   function handleLetterClick(letter: string) {
     // console.log('letter:', letter)
-    setUserLetters(letter);
-    let newNameSpaces: string[][] = [[]];
-    newNameSpaces[currentSpace.word][currentSpace.letter] = letter;
-    console.log('newNameSpaces:', [newNameSpaces, ...nameSpaces])
+    // setUserLetters(letter);
+    // let newNameSpaces: any = [[]];
+    // newNameSpaces[currentSpace.word][currentSpace.letter] = letter;
+    // const newLetter = nameSpaces[currentSpace.word][currentSpace.letter] = letter;
+    const newLetter = nameSpaces[currentSpace[0]][currentSpace[1]] = letter;
 
-    const newCurrentSpace = { word: 0, letter: currentSpace.letter + 1 };
+    // console.log('newNameSpaces:', newNameSpaces);
+    // console.log('currentSpace.word:', newNameSpaces[currentSpace.word])
+    // console.log('currentSpace.letter:', newNameSpaces[currentSpace.word][currentSpace.letter])
+
+    // const newCurrentSpace = { word: 0, letter: currentSpace.letter + 1 };
+    const newCurrentSpace = [0, currentSpace[1] + 1];
+    // setCurrentSpace(newCurrentSpace);
+    // setNameSpaces(prevState => {
+    //   const newLetter = prevState[currentSpace.word][currentSpace.letter] = letter;
+    //   return [...prevState]
+    // });
+
+    const newNameSpaces = [ [...nameSpaces[0], newLetter]];
+
+    console.log('newNameSpaces:', newNameSpaces);
+
+    // setNameSpaces([newNameSpaces, ...newNameSpaces]);
+    setNameSpaces(newNameSpaces);
     setCurrentSpace(newCurrentSpace);
-    // setNameSpaces(newNameSpaces);
-
-    // setCurrentSpace(prevSpace => prevSpace + 1);
   }
 
   return (
