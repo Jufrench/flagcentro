@@ -10,6 +10,7 @@ interface KeyboardProps {
     english: string[][],
     spanish: string[][],
   };
+  onClick: (letter: string) => void;
 }
 
 export default function Keyboard(props: KeyboardProps) {
@@ -17,7 +18,7 @@ export default function Keyboard(props: KeyboardProps) {
   // const language: 'english' | 'spanish' = 'english';
   const language = props.language ?? "english";
 
-  console.log('props', props.letters.english)
+  // console.log('props', props.letters.english)
 
   return (
     <Stack gap="xs" align="center">
@@ -31,8 +32,7 @@ export default function Keyboard(props: KeyboardProps) {
                 <IconBackspace />
               </Button>
             }
-            {row.map((letter: string, index: number) => {
-              console.log("row[letter]", index)
+            {row.map((letter: string) => {
               return (
                 <Button
                   size="compact-xl"
@@ -40,6 +40,7 @@ export default function Keyboard(props: KeyboardProps) {
                     padding: "0 6px",
                     minWidth: "31px",
                   }}
+                  onClick={() => props.onClick(letter)}
                 >
                   {letter}
                 </Button>

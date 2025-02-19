@@ -1,3 +1,4 @@
+// import { useEffect, useState } from "react";
 import { Box, Group, TextInput } from "@mantine/core";
 
 interface NameInputsProps {
@@ -6,6 +7,20 @@ interface NameInputsProps {
 
 export default function NameInputs(props: NameInputsProps) {
   const words = props.countryName.split(" ");
+  // console.log('props.countryName:', props.countryName)
+  // const [inputWidth, setInputWidth] = useState<number>(36);
+  // let inputWidth = 36;
+
+  // useEffect(() => {
+  //   let newWidth = 36;
+  //   words.forEach((word: string) => {
+  //     if (word.length >= 3) {
+  //       newWidth = 32;
+  //       return;
+  //     }
+  //   });
+  //   newWidth !== 36 && setInputWidth(newWidth);
+  // }, [props.countryName]);
   
   return (
     <Group
@@ -20,7 +35,8 @@ export default function NameInputs(props: NameInputsProps) {
           <Box
             style={{
               whiteSpace: "nowrap",
-              display: "flex"
+              display: "flex",
+              outline: "1px solid tomato"
             }}
           >
             <>
@@ -30,7 +46,12 @@ export default function NameInputs(props: NameInputsProps) {
                   <TextInput
                     key={key}
                     size="xl"
-                    style={{ width: "36px", margin: "2px 0" }}
+                    style={{
+                      // width: "36px",
+                      // width: `${inputWidth}px`,
+                      margin: "2px 0",
+                      width: "25px"
+                    }}
                     styles={{
                       input: {
                         padding: 0,
