@@ -11,6 +11,7 @@ interface DailyPlayContentProps {
 }
 
 export default function DailyPlayContent(props: DailyPlayContentProps) {
+  let { name: countryName } = props.activeCountry;
   // const qwertyEnglish = [
   //   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   //   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -39,88 +40,61 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
   };
 
   const [nameSpaces, setNameSpaces] = useState<string[][]>([]);
-  // const [currentSpace, setCurrentSpace] = useState<number[]>([0, 0]);
-
   const [currentSpace, setCurrentSpace] = useState<{ word: number, position: number}>({
     word: 0,
     position: 0
   });
+  const [areSpacesFilled, setAreSpacesFilled] = useState<boolean>(false);
 
   useEffect(() => {
     const tempArray: string[] = [];
-    [...props.activeCountry.name].forEach(letter => {
+
+    [...countryName].forEach(letter => {
       if (letter === " ") return;
       tempArray.push("");
     })
 
-    // setNameSpaces([...tempArray]);
-
-    const spaces = props.activeCountry.name.split(" ");
+    const spaces = countryName.split(" ");
     const emptySpaces = spaces.map(word => {
       return (
         [...word].map(() => {
           return "";
         })
       );
-    })
+    });
 
     setNameSpaces([...emptySpaces]);
   }, [props.activeCountry]);
 
-  console.log('%cnameSpaces:', 'color:goldenrod', nameSpaces)
-  // console.log('newNameSpaces[0].length:', nameSpaces[0].length - 1)
-
   function handleLetterClick(letter: string) {
+    if (areSpacesFilled) { return; }
 
     const isLastWord = currentSpace.word === nameSpaces.length - 1;
     const isLastPosition = currentSpace.position === nameSpaces[currentSpace.word].length - 1;
-
-    if (isLastWord && isLastPosition) {
-      console.log('%cDONE!', 'background:goldenrod')
-      return;
-    }
-
     let newNameSpaces = [...nameSpaces];
 
-    // === Works with ARRAY current space
-    // === moving to next word can be tricky
-    // newNameSpaces[currentSpace[0]][currentSpace[1]] = letter;
-    // setNameSpaces(newNameSpaces);
-    // const newCurrentSpace = [0, currentSpace[1] + 1];
-    // setCurrentSpace(newCurrentSpace);
-
-    // === Works with OBJECT current space
     newNameSpaces[currentSpace.word][currentSpace.position] = letter;
     setNameSpaces(newNameSpaces);
 
-    // If the letter is the last index in the word, move to next word
+    // If the letter is the last index in the word
     if (isLastPosition) {
-      const newCurrentSpace = { word: currentSpace.word + 1, position: 0 };
-      setCurrentSpace(newCurrentSpace);
-      return;
+      // If not the last word, move to next word
+      if (!isLastWord) {
+        const newCurrentSpace = { word: currentSpace.word + 1, position: 0 };
+        setCurrentSpace(newCurrentSpace);
+        return;
+      } else {
+        // If IS the last word, then complete!
+        console.log('COMPLETE!');
+        setAreSpacesFilled(true);
+      }
     }
 
-    const newCurrentSpace = { word: currentSpace.word, position: currentSpace.position + 1 };
-    setCurrentSpace(newCurrentSpace);
-
-
-    // const newCurrentSpace = { word: 0, letter: currentSpace.letter + 1 };
-    // const newCurrentSpace = [0, currentSpace[1] + 1];
-    // setCurrentSpace(newCurrentSpace);
-    // setNameSpaces(prevState => {
-    //   const newLetter = prevState[currentSpace.word][currentSpace.letter] = letter;
-    //   return [...prevState]
-    // });
-
-
-
-    const test = [[...nameSpaces[0]], [...nameSpaces[1]]]
-
-    console.group('%ctesting:', 'background:tomato')
-    console.log('test:', test)
-    console.log('newNameSpaces:', newNameSpaces)
-    console.log('newNameSpaces[0]:', newNameSpaces[0])
-    console.groupEnd()
+    // If leter is NOT in the last position, move to next position
+    if (!isLastPosition) {
+      const newCurrentSpace = { word: currentSpace.word, position: currentSpace.position + 1 };
+      setCurrentSpace(newCurrentSpace);
+    }
   }
 
   return (
@@ -146,7 +120,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
       </Group> */}
       {/* <NameInputs countryName={props.activeCountry.name} /> */}
       <LetterBoxesWrap
-        countryName={props.activeCountry.name.toUpperCase()}
+        countryName={countryName.toUpperCase()}
         nameSpaces={nameSpaces}
       />
       <Keyboard
