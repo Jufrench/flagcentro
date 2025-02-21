@@ -11,6 +11,7 @@ interface KeyboardProps {
     spanish: string[][],
   };
   onClick: (letter: string) => void;
+  onClickBackspace: () => void;
 }
 
 export default function Keyboard(props: KeyboardProps) {
@@ -31,6 +32,7 @@ export default function Keyboard(props: KeyboardProps) {
             {index === props.letters[language].length - 1 &&
               <Button
                 size="compact-xl"
+                onClick={props.onClickBackspace}
               >
                 <IconBackspace />
               </Button>

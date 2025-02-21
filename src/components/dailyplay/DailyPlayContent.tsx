@@ -66,6 +66,20 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     setNameSpaces([...emptySpaces]);
   }, [props.activeCountry]);
 
+  function handleClickBackspace() {
+    // let wordPosition = 0;
+    let newNameSpaces = [...nameSpaces];
+    newNameSpaces[currentSpace.word][currentSpace.position] = "";
+    setNameSpaces(newNameSpaces);
+
+    setCurrentSpace(prevState => {
+      return {
+        word: prevState.word,
+        position: prevState.position - 1
+      }
+    });
+  }
+
   function handleLetterClick(letter: string) {
     if (areSpacesFilled) { return; }
 
@@ -124,6 +138,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
         nameSpaces={nameSpaces}
       />
       <Keyboard
+        onClickBackspace={handleClickBackspace}
         language="english"
         letters={letters}
         onClick={(letter: string) => handleLetterClick(letter)} />
