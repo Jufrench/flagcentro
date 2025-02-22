@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, Paper, Stack } from "@mantine/core";
+import { Accordion, Alert, Button, Group, Paper, Stack, TextInput } from "@mantine/core";
 
 import FlagDisplay, { CountryItem } from "../FlagDisplay";
 import Keyboard from "../Keyboard";
@@ -47,6 +47,8 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
   const [areSpacesFilled, setAreSpacesFilled] = useState<boolean>(false);
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | undefined>();
+  const [inputValue, setInputValue] = useState<string>('');
+  // const [showLetterBoxes, setShowLetterBoxes] = useState<boolean>(true);
 
   useEffect(() => {
     const tempArray: string[] = [];
@@ -138,9 +140,9 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
 
   function handleClickSubmit() {
     const flatUserInput = nameSpaces.flat().join('').toLowerCase();
-    const trimmedCountryName = countryName.replace(/\s/g, '').toLowerCase();
+    const trimCountryName = countryName.replace(/\s/g, '').toLowerCase();
 
-    if (flatUserInput === trimmedCountryName) {
+    if (flatUserInput === trimCountryName) {
       console.log('%cYOU DID IT!', 'background:lightgreen');
       setIsAnswerCorrect(true);
     } else {
@@ -149,6 +151,19 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     }
 
     setHasSubmitted(true);
+  }
+
+  function handleSolve() {
+    const trimCountryName = countryName.replace(/\s/g, '').toLowerCase();
+
+    if (inputValue.toLowerCase() === trimCountryName) {
+      setIsAnswerCorrect(true);
+    } else {
+      setIsAnswerCorrect(false);
+    }
+
+    setHasSubmitted(true);
+    // setShowLetterBoxes(false);
   }
 
   const AnswerResults = () => {
@@ -204,10 +219,34 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
         })}
       </Group> */}
       {/* <NameInputs countryName={props.activeCountry.name} /> */}
-      <LetterBoxesWrap
-        countryName={countryName.toUpperCase()}
-        nameSpaces={nameSpaces}
-      />
+      {/* {showLetterBoxes &&       */}
+        <LetterBoxesWrap
+          countryName={countryName.toUpperCase()}
+          nameSpaces={nameSpaces}
+        />
+      {/* } */}
+      {!hasSubmitted &&
+        <Accordion>
+          <Accordion.Item value="solve">
+            <Accordion.Control>Solve</Accordion.Control>
+            <Accordion.Panel>
+              <Group gap="xs">
+                <TextInput
+                  style={{
+                    // flexGrow: 1
+                    width: "70%"
+                  }}
+                  value={inputValue}
+                  onChange={event => setInputValue(event.currentTarget.value)}
+                />
+                <Button style={{ flexGrow: 1 }} onClick={handleSolve}>
+                  Solve
+                </Button>
+              </Group>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
+      }
       {!hasSubmitted &&
         <Keyboard
           clickLetter={(letter: string) => handleClickLetter(letter)}
