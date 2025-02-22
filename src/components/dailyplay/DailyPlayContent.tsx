@@ -1,10 +1,9 @@
-import { Stack } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { Alert, Paper, Stack } from "@mantine/core";
 
 import FlagDisplay, { CountryItem } from "../FlagDisplay";
 import Keyboard from "../Keyboard";
-// import NameInputs from "./NameInputs";
 import LetterBoxesWrap from "../letterboxes/LetterBoxesWrap";
-import { useEffect, useState } from "react";
 
 interface DailyPlayContentProps {
   activeCountry: CountryItem;
@@ -12,6 +11,7 @@ interface DailyPlayContentProps {
 
 export default function DailyPlayContent(props: DailyPlayContentProps) {
   let { name: countryName } = props.activeCountry;
+
   // const qwertyEnglish = [
   //   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   //   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -45,6 +45,8 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     position: 0
   });
   const [areSpacesFilled, setAreSpacesFilled] = useState<boolean>(false);
+  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | undefined>();
 
   useEffect(() => {
     const tempArray: string[] = [];
@@ -67,11 +69,32 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
   }, [props.activeCountry]);
 
   function handleClickBackspace() {
-    // let wordPosition = 0;
+    const firstWord = currentSpace.word === 0;
+    const firstPosition = currentSpace.position === 0;
+
+    // If the first word and first space DON'T allow backspace click
+    if (firstWord && firstPosition) { return; }
+
+    // If the first space & NOT the last word, DO allow backspace click & jump to previous word
+    if (firstPosition && !firstWord) {
+      const previousWord = currentSpace.word - 1;
+      const previousWordLastLetter = nameSpaces[previousWord].length - 1;
+      const newCurrentSpace = { word: previousWord, position: previousWordLastLetter };
+      let newNameSpaces = [...nameSpaces];
+
+      newNameSpaces[previousWord][previousWordLastLetter] = "";
+      setNameSpaces(newNameSpaces);
+
+      setCurrentSpace(newCurrentSpace);
+      return;
+    }
+
     let newNameSpaces = [...nameSpaces];
-    newNameSpaces[currentSpace.word][currentSpace.position] = "";
+    // Set the previous letter space to an empty string
+    newNameSpaces[currentSpace.word][currentSpace.position - 1] = "";
     setNameSpaces(newNameSpaces);
 
+    // Set the current space model to the current word but previous position
     setCurrentSpace(prevState => {
       return {
         word: prevState.word,
@@ -80,7 +103,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     });
   }
 
-  function handleLetterClick(letter: string) {
+  function handleClickLetter(letter: string) {
     if (areSpacesFilled) { return; }
 
     const isLastWord = currentSpace.word === nameSpaces.length - 1;
@@ -100,6 +123,8 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
       } else {
         // If IS the last word, then complete!
         console.log('COMPLETE!');
+        const newCurrentSpace = { word: currentSpace.word, position: currentSpace.position + 1 };
+        setCurrentSpace(newCurrentSpace);
         setAreSpacesFilled(true);
       }
     }
@@ -109,6 +134,52 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
       const newCurrentSpace = { word: currentSpace.word, position: currentSpace.position + 1 };
       setCurrentSpace(newCurrentSpace);
     }
+  }
+
+  function handleClickSubmit() {
+    const flatUserInput = nameSpaces.flat().join('').toLowerCase();
+    const trimmedCountryName = countryName.replace(/\s/g, '').toLowerCase();
+
+    if (flatUserInput === trimmedCountryName) {
+      console.log('%cYOU DID IT!', 'background:lightgreen');
+      setIsAnswerCorrect(true);
+    } else {
+      console.log('%cTry again next time!', 'color:tomato');
+      setIsAnswerCorrect(false);
+    }
+
+    setHasSubmitted(true);
+  }
+
+  const AnswerResults = () => {
+    return (
+      <>
+        {isAnswerCorrect
+          ?
+          <Paper shadow="sm">
+            <Alert
+              title="Correct!"
+              color="green"
+              variant="light"
+              style={{ border: "1px solid #2f9e44"}}
+            >
+              Great job today!
+            </Alert>
+          </Paper>
+          :
+          <Paper shadow="sm">
+            <Alert
+              title="Aw Shoot!"
+              color="red"
+              variant="light"
+              style={{ border: "1px solid #e03131"}}
+            >
+              Tomorrow is another day to try again!
+            </Alert>
+          </Paper>
+        }
+      </>
+    )
   }
 
   return (
@@ -137,11 +208,29 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
         countryName={countryName.toUpperCase()}
         nameSpaces={nameSpaces}
       />
-      <Keyboard
-        onClickBackspace={handleClickBackspace}
-        language="english"
-        letters={letters}
-        onClick={(letter: string) => handleLetterClick(letter)} />
+      {!hasSubmitted &&
+        <Keyboard
+          clickLetter={(letter: string) => handleClickLetter(letter)}
+          clickSubmit={handleClickSubmit}
+          language="english"
+          letters={letters}
+          onClickBackspace={handleClickBackspace}
+        />
+      }
+      {(hasSubmitted && !isAnswerCorrect) &&
+        <Paper
+          withBorder
+          shadow="xs"
+          p="xs"
+          ta="center"
+        >
+          {countryName}
+        </Paper>
+      }
+      {hasSubmitted && <AnswerResults />}
+      {/* <Button onClick={() => console.clear()}>Clear Console</Button> */}
     </Stack>
   )
 }
+
+// TODO: turn back on persist logs

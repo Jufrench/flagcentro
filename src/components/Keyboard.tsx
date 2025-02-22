@@ -5,12 +5,13 @@ import { IconBackspace, IconChecks } from "@tabler/icons-react";
 interface KeyboardProps {
   // letters: string[][];
   // letters: Record<string, string[]>;
+  clickLetter: (letter: string) => void;
+  clickSubmit: () => void;
   language?: "english" | "spanish" | undefined;
   letters: {
     english: string[][],
     spanish: string[][],
   };
-  onClick: (letter: string) => void;
   onClickBackspace: () => void;
 }
 
@@ -47,7 +48,7 @@ export default function Keyboard(props: KeyboardProps) {
                     padding: "0 6px",
                     minWidth: "31px",
                   }}
-                  onClick={() => props.onClick(letter)}
+                  onClick={() => props.clickLetter(letter)}
                 >
                   {letter}
                 </Button>
@@ -60,7 +61,13 @@ export default function Keyboard(props: KeyboardProps) {
         );
       })}
       {/* <Divider size="xs" w={100} /> */}
-      <Button fullWidth rightSection={<IconChecks />}>SUBMIT</Button>
+      <Button
+        fullWidth
+        rightSection={<IconChecks />}
+        onClick={props.clickSubmit}
+      >
+        SUBMIT
+      </Button>
     </Stack>
   )
   // return (
