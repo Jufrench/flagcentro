@@ -1,14 +1,11 @@
 import { useMemo, useState } from "react";
-import { Button, Checkbox, List, Modal, Stack, Title } from "@mantine/core";
+import { Alert, Button, Checkbox, List, Modal, Stack, Title } from "@mantine/core";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 
-// import QuickPlayContent from "./quickplay/QuickPlayContent";
-// import StandardQuickPlayCard from "./quickplay/StandardQuickPlayCard";
-// import RegionQuickCard from "./quickplay/RegionQuickCard";
-// import DrawerWrapper from "./DrawerWrapper";
 import DailyPlayBanner from "./dailyplay/DailyPlayBanner";
-import TodayStatsBanner from "./dailyplay/TodayStatsBanner";
+// import TodayStatsBanner from "./dailyplay/TodayStatsBanner";
 import Countries from "./../assets/countries.json";
+import { IconAlertTriangleFilled } from "@tabler/icons-react";
 
 export default function Home() {
   let countries = [...Countries];
@@ -82,8 +79,19 @@ export default function Home() {
   return (
     <>
       <Stack>
+        <Alert
+          icon={<IconAlertTriangleFilled />}
+          color="yellow"
+          title="In Construction"
+          style={{ border: "1px solid orange" }}
+        >
+          Some features of the app are still a work in progress!
+        </Alert>
         <DailyPlayBanner activeCountry={activeCountry} />
-        <TodayStatsBanner activeCountry={activeCountry} />
+
+        {/* Implement later */}
+        {/* <TodayStatsBanner activeCountry={activeCountry} /> */}
+
         {/* <StandardQuickPlayCard
           activeRegions={activeRegions}
           open={open}
@@ -95,9 +103,6 @@ export default function Home() {
           <Button onClick={loginModal.open}>Sign up</Button>
         </Stack> */}
       </Stack>
-      {/* <DrawerWrapper opened={opened} onClose={close} title="Daily Play">
-        <QuickPlayContent quickPlayType={"standard"} />
-      </DrawerWrapper> */}
 
       {!dontShowAgain &&
         <Modal
@@ -137,9 +142,6 @@ export default function Home() {
  *   TodayStatsBanner & DailyPlayBanner can share the same active country
  * Use cookies/session storage to check if a use has played daily play
  * Update daily play (quickplaycontent) to use spaces like in DailyPlay.tsx
- * 
- * -- SEARCH
- * Improve UI of flags in search page
  * 
  * -- QUICK PLAY
  * Update QuickPlayContent to not require quickplay type
