@@ -78,7 +78,7 @@ export default function Home() {
 
   return (
     <>
-      <Stack>
+      <Stack style={{ margin: "0 auto", maxWidth: "500px" }}>
         <Alert
           icon={<IconAlertTriangleFilled />}
           color="yellow"
