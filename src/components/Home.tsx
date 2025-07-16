@@ -1,18 +1,22 @@
-import { useMemo, useState } from "react";
-import { Alert, Button, Checkbox, List, Modal, Stack, Title } from "@mantine/core";
+import { useContext, useState } from "react";
+import { Button, Checkbox, List, Modal, Stack, Title } from "@mantine/core";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 
-import DailyPlayBanner from "./dailyplay/DailyPlayBanner";
+// import DailyPlayBanner from "./dailyplay/DailyPlayBanner";
 // import TodayStatsBanner from "./dailyplay/TodayStatsBanner";
-import Countries from "./../assets/countries.json";
-import { IconAlertTriangleFilled } from "@tabler/icons-react";
+// import Countries from "./../assets/countries.json";
 
-import supabase from "../supabaseClient";
+// import supabase from "../supabaseClient";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Home() {
-  let countries = [...Countries];
-  const randNum = useMemo(() => Math.floor(Math.random() * countries.length), []);
-  const activeCountry = useMemo(() => countries[randNum], []);
+  const { user } = useContext(AuthContext);
+
+  console.log('%c///> user', 'color:turquoise', user);
+
+  // let countries = [...Countries];
+  // const randNum = useMemo(() => Math.floor(Math.random() * countries.length), []);
+  // const activeCountry = useMemo(() => countries[randNum], []);
   // const [activeCountry, setActiveCountry] = useState<any | null>(countries[randNum]);
   // const [hasLocalStorage, setHasLocalStorage] = useState<boolean>(false);
   // const [showWelcomeModal, setShowWelcomeModal] = useLocalStorage<boolean>({
@@ -81,23 +85,23 @@ export default function Home() {
   return (
     <>
       <Stack style={{ margin: "0 auto", maxWidth: "500px" }}>
-        <Button
+        {/* <Button
           onClick={async () => {
             const { data, error } = await supabase.from('Test').select()
             console.log('%cHello!', 'color:limegreen', data, error)
           }}
         >
           Fetch Data!
-        </Button>
-        <Alert
+        </Button> */}
+        {/* <Alert
           icon={<IconAlertTriangleFilled />}
           color="yellow"
           title="In Construction"
           style={{ border: "1px solid orange" }}
         >
           Some features of the app are still a work in progress!
-        </Alert>
-        <DailyPlayBanner activeCountry={activeCountry} />
+        </Alert> */}
+        {/* <DailyPlayBanner activeCountry={activeCountry} /> */}
 
         {/* Implement later */}
         {/* <TodayStatsBanner activeCountry={activeCountry} /> */}
