@@ -7,6 +7,8 @@ import DailyPlayBanner from "./dailyplay/DailyPlayBanner";
 import Countries from "./../assets/countries.json";
 import { IconAlertTriangleFilled } from "@tabler/icons-react";
 
+import supabase from "../supabaseClient";
+
 export default function Home() {
   let countries = [...Countries];
   const randNum = useMemo(() => Math.floor(Math.random() * countries.length), []);
@@ -79,6 +81,14 @@ export default function Home() {
   return (
     <>
       <Stack style={{ margin: "0 auto", maxWidth: "500px" }}>
+        <Button
+          onClick={async () => {
+            const { data, error } = await supabase.from('Test').select()
+            console.log('%cHello!', 'color:limegreen', data, error)
+          }}
+        >
+          Fetch Data!
+        </Button>
         <Alert
           icon={<IconAlertTriangleFilled />}
           color="yellow"
