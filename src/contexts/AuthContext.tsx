@@ -19,25 +19,31 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<Record<string, any>>();
 
+  const getUser = async (email: string | undefined) => {
+    const response = await supabase.from("Users").select().eq('email', email);
+    // console.log('%c/// response', 'color:tomato', response);
+    if (response.data) setUser(response.data?.[0]);
+  }
+
   async function login(email: string, password: string) {
     const response = await supabase.auth.signInWithPassword({
       email, password
     });
-    console.log('///> response', response)
+    // console.log('%c///> response', 'color:limegreen', response)
     if (response?.data?.user?.aud === "authenticated") {
       setIsLoggedIn(true);
-      setUser(response.data.user);
+      getUser(response?.data?.user?.email);
       navigate("/home");
     }
   };
 
-  // function logout() {
-  //   setStoredUser(null);
-  //   navigate("/login");
-  // };
+  async function logout() {
+    await supabase.auth.signOut();
+    navigate("/");
+  };
 
   return (
-    <AuthContextProvider value={{ isLoggedIn, login, user }}>
+    <AuthContextProvider value={{ isLoggedIn, login, logout, user }}>
       <>{children}</>
     </AuthContextProvider>
   )

@@ -1,14 +1,16 @@
 import { useContext, useState } from "react";
 import DailyPlayBanner from "../components/dailyplay/DailyPlayBanner";
-import { useDisclosure, useLocalStorage, useToggle } from "@mantine/hooks";
-import { Button, Checkbox, Group, List, Modal, Paper, Stack, Text, TextInput, Title } from "@mantine/core";
+import { useDisclosure, useLocalStorage } from "@mantine/hooks";
+import { Anchor, Button, Checkbox, Group, List, Modal, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import supabase from "../supabaseClient";
 
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function LandingPage() {
-  const [toggleValue, toggle] = useToggle(["login", "signup"]);
+
+  // const [toggleValue, toggle] = useToggle(["login", "signup"]);
+  const [loginAction, setLoginAction] = useState<"login" | "signup" | undefined>();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -37,17 +39,12 @@ export default function LandingPage() {
     dontShowAgainChecked && setDontShowAgain(true);
   }
 
-  const [isLoginModalOpen, loginModalHandlers] = useDisclosure(true);
+  const [isLoginModalOpen, loginModalHandlers] = useDisclosure(false);
   const loginModal = {
     opened: isLoginModalOpen,
     open: loginModalHandlers.open,
     close: loginModalHandlers.close
   };
-
-  function handleCloseLoginModal() {
-    loginModal.close();
-    // dontShowAgainChecked && setDontShowAgain(true);
-  }
 
   async function createUser(userInfo: Record<string, string>) {
     const authId = await createAuthUser({ email: userInfo.email, password: userInfo.password });
@@ -71,7 +68,7 @@ export default function LandingPage() {
     });
 
     return response.data.user?.id;
-  }
+  };
 
   const createPublicUser = async (auth_id: any) => {
     const { /* data, error, */ status } = await supabase.from('Users').insert({
@@ -97,7 +94,8 @@ export default function LandingPage() {
             <Text>Create an account to access more features!</Text>
             <Button
               onClick={() => {
-                toggle();
+                // toggle();
+                setLoginAction("signup");
                 loginModal.open();
               }}
             >
@@ -107,13 +105,14 @@ export default function LandingPage() {
               <Text size="sm">Already have an account?</Text>
               <Button
                 onClick={() => {
-                  toggle();
+                  // toggle();
+                  setLoginAction("login");
                   loginModal.open();
                 }}
                 size="xs"
                 variant="subtle"
                 >
-                  Sign in
+                  Log in
                 </Button>
             </Group>
           </Stack>
@@ -131,7 +130,17 @@ export default function LandingPage() {
           <List mb="4em">
             <List.Item>Challenge your knowledge of flags daily</List.Item>
             <List.Item>Guesses are limited</List.Item>
-            <List.Item>Sign up to access more features</List.Item>
+            <List.Item>
+              <Anchor
+                mr={5}
+                component="button"
+                variant="subtle"
+                onClick={loginModal.open}
+              >
+                Sign up
+              </Anchor>
+              <span>to access more features</span>
+            </List.Item>
           </List>
           <Stack ta="center" gap="xl">
             <Checkbox
@@ -146,18 +155,20 @@ export default function LandingPage() {
       }
 
       {/* Sign Up/Sign In Modal */}
-      <Modal.Root opened={loginModal.opened} onClose={handleCloseLoginModal}>
+      <Modal.Root opened={loginModal.opened} onClose={() => loginModal.close()}>
         <Modal.Overlay />
         <Modal.Content>
           <Modal.Header>
             <Modal.Title>
-              {toggleValue === "login" ? "Log in" : "Sign Up"}
+              {/* {toggleValue === "login" ? "Log in" : "Sign Up"} */}
+              {loginAction === "login" ? "Log in" : "Sign Up"}
             </Modal.Title>
             <Modal.CloseButton />
           </Modal.Header>
           <Modal.Body>
             <Stack>
-              {toggleValue === "login" && 
+              {/* {toggleValue === "login" &&  */}
+              {loginAction === "login" && 
                 <>
                   <TextInput
                     placeholder="Email"
@@ -166,7 +177,7 @@ export default function LandingPage() {
                       setLoginEmail(event.target.value)
                     }}
                   />
-                  <TextInput
+                  <PasswordInput
                     placeholder="Password"
                     value={loginPassword}
                     onChange={event => setLoginPassword(event.target.value)}
@@ -174,7 +185,8 @@ export default function LandingPage() {
                   <Button onClick={() => login(loginEmail, loginPassword)}>Log in</Button>
                 </>
               }
-              {toggleValue === "signup" && 
+              {/* {toggleValue === "signup" &&  */}
+              {loginAction === "signup" && 
                 <>
                   <TextInput
                     placeholder="Name"
@@ -186,12 +198,12 @@ export default function LandingPage() {
                     value={email}
                     onChange={event => setEmail(event.target.value)}
                   />
-                  <TextInput
+                  <PasswordInput
                     placeholder="Password"
                     value={password}
                     onChange={event => setPassword(event.target.value)}
                   />
-                  <TextInput
+                  <PasswordInput
                     placeholder="Confirm Password"
                     value={confirmPassword}
                     error={passwordMatchError}
