@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Accordion, Alert, Button, Group, Paper, Stack, TextInput } from "@mantine/core";
+import { Accordion, Alert, Button, Group, Paper, Stack, Text, TextInput } from "@mantine/core";
+import { useLocalStorage } from "@mantine/hooks";
 
 import FlagDisplay, { CountryItem } from "../FlagDisplay";
 import Keyboard from "../Keyboard";
@@ -11,6 +12,12 @@ interface DailyPlayContentProps {
 
 export default function DailyPlayContent(props: DailyPlayContentProps) {
   let { name: countryName } = props.activeCountry;
+  const [hasPlayedToday, setHasPlayedToday] = useLocalStorage<boolean | undefined>({
+    key: "has_played_today",
+    defaultValue: false
+  });
+
+  console.log('%chasPlayedToday:', 'border:1px solid limegreen', hasPlayedToday)
 
   // const qwertyEnglish = [
   //   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -49,6 +56,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | undefined>();
   const [inputValue, setInputValue] = useState<string>('');
   // const [showLetterBoxes, setShowLetterBoxes] = useState<boolean>(true);
+  // const [guessesLeft, setGuessesLeft] = useState<number>(5);
 
   useEffect(() => {
     const tempArray: string[] = [];
@@ -70,6 +78,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     setNameSpaces([...emptySpaces]);
   }, [props.activeCountry]);
 
+  // Clicking backspace
   function handleClickBackspace() {
     const firstWord = currentSpace.word === 0;
     const firstPosition = currentSpace.position === 0;
@@ -105,6 +114,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     });
   }
 
+  // Clicking a letter
   function handleClickLetter(letter: string) {
     if (areSpacesFilled) { return; }
 
@@ -138,6 +148,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     }
   }
 
+  // Submitting Answer
   function handleClickSubmit() {
     const flatUserInput = nameSpaces.flat().join('').toLowerCase();
     const trimCountryName = countryName.replace(/\s/g, '').toLowerCase();
@@ -151,8 +162,10 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     }
 
     setHasSubmitted(true);
+    setHasPlayedToday(true);
   }
 
+  // Solve Challenge
   function handleSolve() {
     const trimCountryName = countryName.replace(/\s/g, '').toLowerCase();
 
@@ -164,6 +177,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
 
     setHasSubmitted(true);
     // setShowLetterBoxes(false);
+    setHasPlayedToday(true);
   }
 
   const AnswerResults = () => {
@@ -198,8 +212,12 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
   }
 
   return (
-    <Stack pb="4em" style={{ margin: "0 auto", maxWidth: "500px" }}>
+    <Stack pb="4em" style={{ margin: "0 auto", maxWidth: "500px" }} gap="sm">
       <FlagDisplay activeCountry={props.activeCountry} />
+      {/* <Group gap={5}>
+        <Text>Guesses Left: </Text>
+        <span>{guessesLeft}</span>
+      </Group> */}
       {/* <Keyboard letters={qwertyEnglish} /> */}
       {/* <Group gap={1} justify="center">
         {Array.from(props.activeCountry.name.toUpperCase()).map(letter => {
@@ -247,6 +265,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
           </Accordion.Item>
         </Accordion>
       }
+      {/* <Button>Guess</Button> */}
       {!hasSubmitted &&
         <Keyboard
           clickLetter={(letter: string) => handleClickLetter(letter)}
@@ -271,5 +290,3 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     </Stack>
   )
 }
-
-// TODO: turn back on persist logs

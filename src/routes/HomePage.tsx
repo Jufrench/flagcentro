@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
-import { Button, Checkbox, List, Modal, Stack, Title } from "@mantine/core";
-import { useDisclosure, useLocalStorage } from "@mantine/hooks";
+import { useContext } from "react";
+import { Button, Stack } from "@mantine/core";
+// import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 
 // import DailyPlayBanner from "./dailyplay/DailyPlayBanner";
 // import TodayStatsBanner from "./dailyplay/TodayStatsBanner";
@@ -8,8 +8,9 @@ import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 
 // import supabase from "../supabaseClient";
 import { AuthContext } from "../contexts/AuthContext";
+import DailyPlayBanner from "../components/dailyplay/DailyPlayBanner";
 
-export default function Home() {
+export default function HomePage() {
   const { user } = useContext(AuthContext);
 
   console.log('%c///> user', 'color:turquoise', user);
@@ -29,11 +30,11 @@ export default function Home() {
   //   defaultValue: false
   // });
 
-  const [dontShowAgainChecked, setDontShowAgainChecked] = useState<boolean>(false);
-  const [dontShowAgain, setDontShowAgain] = useLocalStorage<boolean>({
-    key: 'dont_show_again',
-    defaultValue: false
-  });
+  // const [dontShowAgainChecked, setDontShowAgainChecked] = useState<boolean>(false);
+  // const [dontShowAgain, setDontShowAgain] = useLocalStorage<boolean>({
+  //   key: 'dont_show_again',
+  //   defaultValue: false
+  // });
 
 
   // const [opened, { open, close }] = useDisclosure(false);
@@ -44,12 +45,12 @@ export default function Home() {
   //   close: dailyPlayHandlers.close
   // };
   // const [openedModal, { open: openModal, close: closeModal }] = useDisclosure(false);
-  const [isWelcomeModalOpen, welcomeModalHandlers] = useDisclosure(true);
-  const welcomeModal = {
-    opened: isWelcomeModalOpen,
-    open: welcomeModalHandlers.open,
-    close: welcomeModalHandlers.close
-  };
+  // const [isWelcomeModalOpen, welcomeModalHandlers] = useDisclosure(true);
+  // const welcomeModal = {
+  //   opened: isWelcomeModalOpen,
+  //   open: welcomeModalHandlers.open,
+  //   close: welcomeModalHandlers.close
+  // };
 
   // const [isLoginOpen, loginModalHandlers] = useDisclosure(false);
   // const loginModal = {
@@ -77,14 +78,16 @@ export default function Home() {
   // console.log('dontShowStorageValue:', dontShowStorageValue)
   // console.groupEnd()
 
-  function handleCloseWelcomeModal() {
-    welcomeModal.close();
-    dontShowAgainChecked && setDontShowAgain(true);
-  }
+  // function handleCloseWelcomeModal() {
+  //   welcomeModal.close();
+  //   dontShowAgainChecked && setDontShowAgain(true);
+  // }
 
   return (
     <>
       <Stack style={{ margin: "0 auto", maxWidth: "500px" }}>
+        <DailyPlayBanner />
+        {/* <Button>Quick Play</Button> */}
         {/* <Button
           onClick={async () => {
             const { data, error } = await supabase.from('Test').select()
@@ -118,7 +121,7 @@ export default function Home() {
         </Stack> */}
       </Stack>
 
-      {!dontShowAgain &&
+      {/* {!dontShowAgain &&
         <Modal
           withCloseButton={false}
           opened={welcomeModal.opened}
@@ -140,7 +143,7 @@ export default function Home() {
             </Button>
           </Stack>
         </Modal>
-      }
+      } */}
       {/* <Modal opened={isLoginOpen} onClose={loginModal.close}>Create an account!</Modal> */}
     </>
   )

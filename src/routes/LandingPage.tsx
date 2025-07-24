@@ -52,8 +52,8 @@ export default function LandingPage() {
 
     if (status === 201) {
       notifications.show({
-        title: "Success!",
-        message: "Account Created"
+        title: "Pending",
+        message: "Verification email sent!"
       });
 
       loginModal.close();
@@ -86,7 +86,6 @@ export default function LandingPage() {
         <Title ta="center" order={2}>Flag Centro</Title>
         <Stack gap={0}>
           <Text ta="center">Test your flag knowledge once a day!</Text>
-          <Text ta="center">(temporarily unlimited)</Text>
         </Stack>
         <DailyPlayBanner />
         <Paper withBorder p="md">

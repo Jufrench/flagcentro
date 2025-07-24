@@ -5,13 +5,13 @@ import './App.css'
 import PageLayout from './components/PageLayout';
 import Search from './components/Search';
 import MultiPlayer from './components/MultiPlayer';
-import Home from './components/Home';
 // import DailyPlay from './components/dailyplay/DailyPlay';
 import QuickPlayContent from './components/quickplay/QuickPlayContent';
 import LandingPage from './routes/LandingPage';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AuthProvider from './contexts/AuthContext';
 import ProfilePage from './routes/ProfilePage';
+import HomePage from './routes/HomePage';
 
 function App() {
   console.log('%cGo through index.css to remove unnecessary styling', 'color:tomato');
@@ -27,7 +27,7 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="search" element={<Search />} />
           {/* <Route path="dailyplay" element={<DailyPlay />} /> */}
           <Route path="quickplay" element={<QuickPlayContent quickPlayType="standard" />} />

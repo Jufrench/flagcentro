@@ -11,7 +11,7 @@ export default function BottomNavBar() {
   return (
     <>
       <Group p="md" justify="space-between">
-        <NavLink to="/" end><ActionIcon size="xl" variant="light"><IconHomeFilled /></ActionIcon></NavLink>
+        <NavLink to="/home" end><ActionIcon size="xl" variant="light"><IconHomeFilled /></ActionIcon></NavLink>
         <NavLink to="/search" end><ActionIcon size="xl" variant="light"><IconSearch /></ActionIcon></NavLink>
         {/* <NavLink to="/dailyplay" end><ActionIcon size="xl" variant="light"><IconPlayerPlayFilled /></ActionIcon></NavLink> */}
         <NavLink to="/quickplay" end><ActionIcon size="xl" variant="light"><IconPlayerPlayFilled /></ActionIcon></NavLink>
