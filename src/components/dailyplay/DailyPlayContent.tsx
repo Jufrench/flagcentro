@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Accordion, Alert, Button, Group, Paper, Stack, Text, TextInput } from "@mantine/core";
+import { Accordion, Alert, Button, Group, Paper, Stack, TextInput } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 
 import FlagDisplay, { CountryItem } from "../FlagDisplay";
