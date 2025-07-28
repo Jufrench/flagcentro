@@ -20,6 +20,7 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="*" element={<LandingPage />} />
         <Route
           element={
             <ProtectedRoute>
