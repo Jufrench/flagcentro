@@ -1,15 +1,24 @@
 import { useContext, useState } from "react";
 import DailyPlayBanner from "../components/dailyplay/DailyPlayBanner";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
-import { Anchor, Button, Checkbox, Group, List, Modal, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
+import { Alert, Anchor, Button, Checkbox, Group, List, Modal, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import supabase from "../supabaseClient";
 
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function LandingPage() {
+  // const [lastPlayed, setLastPlayed] = useLocalStorage<string | undefined | Date>({
+  //   key: "last_played",
+  //   defaultValue: readLocalStorageValue({ key: "last_played" })
+  //   // defaultValue: new Date("2025-07-27")
+  // });
 
-  // const [toggleValue, toggle] = useToggle(["login", "signup"]);
+  // const todayStart = new Date();
+  // todayStart.setHours(0, 0, 0, 0);
+
+  // const hasPlayedToday = lastPlayed && new Date(lastPlayed) >= todayStart;
+
   const [loginAction, setLoginAction] = useState<"login" | "signup" | undefined>();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -80,6 +89,12 @@ export default function LandingPage() {
     return status;
   };
 
+  // function handleSetLastPlayed(dateValue: Date) {
+  //   setLastPlayed(dateValue);
+  // }
+
+  console.warn("NEED TO HANDLE LOGIC FOR LAST PLAYED AND SUCH IN DAILYPLAYBANNER BECAUSE IT\'S USED MORE THAN ONCE")
+
   return (
     <>
       <Stack p="sm">
@@ -88,7 +103,7 @@ export default function LandingPage() {
           <Text ta="center">Test your flag knowledge once a day!</Text>
         </Stack>
         <DailyPlayBanner />
-        <Paper withBorder p="md">
+        {/* <Paper withBorder p="md">
           <Stack align="center" gap="xs">
             <Text>Create an account to access more features!</Text>
             <Button
@@ -115,7 +130,36 @@ export default function LandingPage() {
                 </Button>
             </Group>
           </Stack>
-        </Paper>
+        </Paper> */}
+        <Alert
+          title="Create an account to access more features!"
+          styles={{
+            message: { display: "flex", flexDirection: "column", alignItems: "center" }
+          }}
+        >
+          <Button
+            onClick={() => {
+              setLoginAction("signup");
+              loginModal.open();
+            }}
+          >
+            Sign Up!
+          </Button>
+          <Group gap={0}>
+            <Text size="sm">Already have an account?</Text>
+            <Button
+              onClick={() => {
+                // toggle();
+                setLoginAction("login");
+                loginModal.open();
+              }}
+              size="xs"
+              variant="subtle"
+              >
+                Log in
+              </Button>
+          </Group>
+        </Alert>
       </Stack>
 
       {/* Welcome Modal */}

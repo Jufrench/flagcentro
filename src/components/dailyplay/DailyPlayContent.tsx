@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Accordion, Alert, Button, Group, Paper, Stack, TextInput } from "@mantine/core";
-import { useLocalStorage } from "@mantine/hooks";
+// import { useLocalStorage } from "@mantine/hooks";
 
 import FlagDisplay, { CountryItem } from "../FlagDisplay";
 import Keyboard from "../Keyboard";
@@ -12,12 +12,11 @@ interface DailyPlayContentProps {
 
 export default function DailyPlayContent(props: DailyPlayContentProps) {
   let { name: countryName } = props.activeCountry;
-  const [hasPlayedToday, setHasPlayedToday] = useLocalStorage<boolean | undefined>({
-    key: "has_played_today",
-    defaultValue: false
-  });
-
-  console.log('%chasPlayedToday:', 'border:1px solid limegreen', hasPlayedToday)
+  // const [hasPlayedToday, setHasPlayedToday] = useLocalStorage<boolean | undefined>({
+  //   key: "has_played_today",
+  //   defaultValue: false
+  // });
+  // console.log('%chasPlayedToday:', 'border:1px solid limegreen', hasPlayedToday)
 
   // const qwertyEnglish = [
   //   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -162,7 +161,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     }
 
     setHasSubmitted(true);
-    setHasPlayedToday(true);
+    // setHasPlayedToday(true);
   }
 
   // Solve Challenge
@@ -177,7 +176,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
 
     setHasSubmitted(true);
     // setShowLetterBoxes(false);
-    setHasPlayedToday(true);
+    // setHasPlayedToday(true);
   }
 
   const AnswerResults = () => {

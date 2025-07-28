@@ -1,7 +1,8 @@
-import { Button, Divider, Group, Image, Paper, SimpleGrid, Stack, Text, TextInput } from "@mantine/core";
-import { useState } from "react";
+import { Button, Divider, Group, SimpleGrid, Stack, Text, TextInput } from "@mantine/core";
+import React, { useState } from "react";
 
 import Countries from "../assets/countries.json";
+import FlagDisplay from "./FlagDisplay";
 
 export default function Search() {
   const [userInput, setUserInput] = useState("");
@@ -42,30 +43,14 @@ export default function Search() {
             >
               <Text component="span" tt="capitalize">{item}</Text>
             </Button>
-          )
+          );
         })}
       </Group>
       <Divider my="xs" />
-      <SimpleGrid cols={2}>
+      {/* <SimpleGrid cols={2}>
         {foundCoutnries.map((country: any) => {
           return (
-            // <div key={country.name}>
-            //   <Text size="md" style={{
-            //     background: "#fff",
-            //     color: "#000"
-            //   }}>{country.name}</Text>
-            //   <Image src={country.flags.png} alt={country.flags.alt} />
-            // </div>
-            // <Card key={country.name} withBorder>
-            //   <Text size="md" style={{ background: "#fff", color: "#000" }}>
-            //     {country.name}
-            //   </Text>
-            //   <Card.Section>
-            //     <Image src={country.flags.png} alt={country.flags.alt} />
-            //   </Card.Section>
-            // </Card>
             <Stack key={country.name} gap={3}>
-              {/* <Text ta="center" size="md" style={{ background: "#eee", border: "1px solid gray" }}>{country.name}</Text> */}
               <Paper withBorder ta="center" shadow="sm">
                 {country.name}
               </Paper>
@@ -73,13 +58,16 @@ export default function Search() {
                 <Image radius="sm" src={country.flags.png} style={{ border: "1px solid gray" }} />
               </Paper>
             </Stack>
-            // <Paper key={country.name} withBorder>
-            //   <Text size="md" pb="xs" style={{ background: "#fff", color: "#000" }}>
-            //     {country.name}
-            //   </Text>
-            //   <Image src={country.flags.png} alt={country.flags.alt} />
-            // </Paper>
           )
+        })}
+      </SimpleGrid> */}
+      <SimpleGrid cols={2}>
+        {foundCoutnries.map((country: any) => {
+          return (
+            <React.Fragment key={country.name}>
+              <FlagDisplay activeCountry={country} showName={true} />
+            </React.Fragment>
+          );
         })}
       </SimpleGrid>
     </Stack>
