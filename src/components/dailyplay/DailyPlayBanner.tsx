@@ -24,7 +24,7 @@ export default function DailyPlayBanner() {
   const randNum = useMemo(() => Math.floor(Math.random() * countries.length), []);
   const activeCountry = useMemo(() => countries[randNum], []);
 
-  const [lastPlayed, setLastPlayed] = useLocalStorage<string | undefined | Date>({
+  const [lastPlayed, /* setLastPlayed */] = useLocalStorage<string | undefined | Date>({
     key: "last_played",
     defaultValue: readLocalStorageValue({ key: "last_played" })
     // defaultValue: new Date("2025-07-27")
