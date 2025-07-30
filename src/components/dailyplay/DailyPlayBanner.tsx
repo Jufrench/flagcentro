@@ -61,33 +61,33 @@ export default function DailyPlayBanner() {
 
   return (
     <>
-    {!hasPlayedToday &&
-      <Paper withBorder p="md" shadow="md">
-        <Stack gap="sm">
-          <Title order={4}>Daily Play</Title>
-          <PlayBannerContent />
-        </Stack>
-      </Paper>
-    }
-    {hasPlayedToday &&
-      <Stack gap="md">
-        <Stack gap="xs">
-          <Title order={3}>Today's Flag</Title>
-          <Button size="compact-sm">See Game Stats</Button>
-        </Stack>
-        <Paper shadow="md">
-          {hasPlayedToday === true && <FlagDisplay activeCountry={activeCountry} showName={true} />}
+      {!hasPlayedToday &&
+        <Paper withBorder p="md" shadow="md">
+          <Stack gap="sm">
+            <Title order={4}>Daily Play</Title>
+            <PlayBannerContent />
+          </Stack>
         </Paper>
-      </Stack>
-    }
-    <DrawerWrapper opened={opened} onClose={close} title="Daily Play">
-      {/* <QuickPlayContent quickPlayType={quickPlayType} countriesFilter={activeRegions} /> */}
-      <>
-      {/* <QuickPlayContent quickPlayType={"standard"} /> */}
-      {/* <DailyPlayContent activeCountry={props.activeCountry} /> */}
-        <DailyPlayContent activeCountry={activeCountry} />
-      </>
-    </DrawerWrapper>
+      }
+      {hasPlayedToday &&
+        <Stack gap="md">
+          <Stack gap="xs">
+            <Title order={3}>Today's Flag</Title>
+            <Button size="compact-sm">See Game Stats</Button>
+          </Stack>
+          <Paper shadow="md">
+            {hasPlayedToday === true && <FlagDisplay activeCountry={activeCountry} showName={true} />}
+          </Paper>
+        </Stack>
+      }
+      <DrawerWrapper opened={opened} onClose={close} title="Daily Play">
+        {/* <QuickPlayContent quickPlayType={quickPlayType} countriesFilter={activeRegions} /> */}
+        <>
+        {/* <QuickPlayContent quickPlayType={"standard"} /> */}
+        {/* <DailyPlayContent activeCountry={props.activeCountry} /> */}
+          <DailyPlayContent activeCountry={activeCountry} />
+        </>
+      </DrawerWrapper>
     </>
   );
 }

@@ -19,7 +19,7 @@ export default function MobileHeader() {
 
   let displayPath = location.pathname;
 
-  if (location.pathname === "/") displayPath = "Home";
+  if (location.pathname === "/home") displayPath = "Flag Centro";
   if (location.pathname === "/search") displayPath = "Search";
   if (location.pathname === "/quickplay") displayPath = "Quick Play";
   if (location.pathname === "/multi") displayPath = "Multi Player";
