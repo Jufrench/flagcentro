@@ -1,12 +1,14 @@
-import { Avatar, Button, DEFAULT_THEME, Divider, Drawer, Group, MantineColorScheme, Paper, SegmentedControl, Select, Stack, Text, Title, useMantineColorScheme } from "@mantine/core";
+import { Avatar, Button, DEFAULT_THEME, Drawer, Group, MantineColorScheme, Paper, SegmentedControl, Select, Stack, Text, Title, useMantineColorScheme } from "@mantine/core";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { IconArrowRight } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import PersonalInfoContent from "../components/profile/PersonalInfoContent";
 import ChangePasswordContent from "../components/profile/ChangePasswordContent";
+import AvatarContent from "../components/profile/AvatarContent";
 
 enum DrawerContent {
+  Avatar = "Avatar",
   PersonalInfo = "Personal Info",
   ChangePassword = "Change Password"
 }
@@ -38,8 +40,23 @@ export default function ProfilePage() {
   return (
     <>
       <Stack>
-        <Title order={3}>Hello {user.name}</Title>
-        <Avatar />
+        <AvatarContent />
+        <Paper style={itemWrapStyle}>
+          <Stack align="center" gap={0}>
+            <Button
+              variant="subtle"
+              size="compact-xs"
+              style={{ alignSelf: "flex-end" }}
+              onClick={() => openDrawer(DrawerContent.Avatar)}
+            >
+              Edit
+            </Button>
+            <Stack>
+              <Avatar />
+              <Title order={4}>{user.name}</Title>
+            </Stack>
+          </Stack>
+        </Paper>
         <Stack gap={0}>
           <Paper style={itemWrapStyle}>
             <Button
@@ -66,7 +83,7 @@ export default function ProfilePage() {
             </Button>
           </Paper>
         </Stack>
-        <Divider />
+
         <Stack gap={0}>
           <Paper style={itemWrapStyle}>
             <Group>
@@ -92,11 +109,12 @@ export default function ProfilePage() {
           </Paper>
         </Stack>
         
-        <Divider />
-        <Text>Last Login</Text>
+        {/* <Divider />
+        <Text>Last Login</Text> */}
         <Button onClick={logout}>Log out</Button>
       </Stack>
-      <Drawer opened={opened} onClose={close} position="right">
+      <Drawer opened={opened} onClose={close} position="right" title={drawerContent}>
+        {drawerContent === DrawerContent.PersonalInfo && <AvatarContent />}
         {drawerContent === DrawerContent.PersonalInfo && <PersonalInfoContent />}
         {drawerContent === DrawerContent.ChangePassword && <ChangePasswordContent />}
       </Drawer>
