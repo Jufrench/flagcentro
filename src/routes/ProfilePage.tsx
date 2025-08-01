@@ -6,11 +6,13 @@ import { useDisclosure } from "@mantine/hooks";
 import PersonalInfoContent from "../components/profile/PersonalInfoContent";
 import ChangePasswordContent from "../components/profile/ChangePasswordContent";
 import AvatarContent from "../components/profile/AvatarContent";
+import PrivacyContent from "../components/profile/PrivacyContent";
 
 enum DrawerContent {
   Avatar = "Avatar",
   PersonalInfo = "Personal Info",
-  ChangePassword = "Change Password"
+  ChangePassword = "Change Password",
+  Privacy = "Privacy"
 }
 
 export default function ProfilePage() {
@@ -40,8 +42,7 @@ export default function ProfilePage() {
   return (
     <>
       <Stack>
-        <AvatarContent />
-        <Paper style={itemWrapStyle}>
+        <Paper pt="xs" pr="xs" style={itemWrapStyle}>
           <Stack align="center" gap={0}>
             <Button
               variant="subtle"
@@ -82,6 +83,18 @@ export default function ProfilePage() {
               Change Password
             </Button>
           </Paper>
+          <Paper style={itemWrapStyle}>
+            <Button
+              variant="subtle"
+              justify="space-between"
+              fullWidth
+              rightSection={<IconArrowRight />}
+              style={buttonStyle}
+              onClick={() => openDrawer(DrawerContent.Privacy)}
+            >
+              Privacy
+            </Button>
+          </Paper>
         </Stack>
 
         <Stack gap={0}>
@@ -114,9 +127,10 @@ export default function ProfilePage() {
         <Button onClick={logout}>Log out</Button>
       </Stack>
       <Drawer opened={opened} onClose={close} position="right" title={drawerContent}>
-        {drawerContent === DrawerContent.PersonalInfo && <AvatarContent />}
+        {drawerContent === DrawerContent.Avatar && <AvatarContent />}
         {drawerContent === DrawerContent.PersonalInfo && <PersonalInfoContent />}
         {drawerContent === DrawerContent.ChangePassword && <ChangePasswordContent />}
+        {drawerContent === DrawerContent.Privacy && <PrivacyContent />}
       </Drawer>
     </>
   );
