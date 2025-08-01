@@ -1,17 +1,18 @@
-import '@mantine/core/styles.css';
 import { Route, Routes } from 'react-router';
 
-import './App.css'
 import PageLayout from './components/PageLayout';
 import Search from './components/Search';
 import MultiPlayer from './components/MultiPlayer';
-// import DailyPlay from './components/dailyplay/DailyPlay';
 import QuickPlayContent from './components/quickplay/QuickPlayContent';
 import LandingPage from './routes/LandingPage';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AuthProvider from './contexts/AuthContext';
 import ProfilePage from './routes/ProfilePage';
 import HomePage from './routes/HomePage';
+
+import './App.css'
+import '@mantine/core/styles.css';
+import '@mantine/dropzone/styles.css';
 
 function App() {
   console.log('%cGo through index.css to remove unnecessary styling', 'color:tomato');
