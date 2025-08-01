@@ -37,7 +37,7 @@ export default function DailyPlay() {
   return (
     <Stack style={{ margin: "0 auto", maxWidth: "500px" }}>
       <Alert variant="filled" color="red" title="Under Construction" icon={<IconBarrierBlock />}>This page is currently under constuction.</Alert>
-      <FlagDisplay activeCountry={country} />
+      {/* <FlagDisplay activeCountry={country} /> */}
       <AnswerHint activeCountry={country} />
       <NameInputs countryName={country.name} />
       <TextInput

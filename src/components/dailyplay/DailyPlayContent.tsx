@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Accordion, Alert, Button, Group, Paper, Stack, TextInput } from "@mantine/core";
+import { Accordion, Alert, Button, Group, Paper, Stack, Text, TextInput } from "@mantine/core";
 // import { useLocalStorage } from "@mantine/hooks";
 
 import FlagDisplay, { CountryItem } from "../FlagDisplay";
@@ -10,40 +10,29 @@ interface DailyPlayContentProps {
   activeCountry: CountryItem;
 }
 
+const letters = {
+  english: [
+    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    ["Z", "X", "C", "V", "B", "N", "M"]
+  ],
+  spanish: [
+    ["Á", "É", "Í", "Ó", "Ú"],
+    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"],
+    ["Z", "X", "C", "V", "B", "N", "M"]
+  ]
+};
+
 export default function DailyPlayContent(props: DailyPlayContentProps) {
   let { name: countryName } = props.activeCountry;
+  const guesses: string[] = [];
+  let guessesLeft = 3;
   // const [hasPlayedToday, setHasPlayedToday] = useLocalStorage<boolean | undefined>({
   //   key: "has_played_today",
   //   defaultValue: false
   // });
   // console.log('%chasPlayedToday:', 'border:1px solid limegreen', hasPlayedToday)
-
-  // const qwertyEnglish = [
-  //   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-  //   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-  //   ["Z", "X", "C", "V", "B", "N", "M"]
-  // ];
-
-  // const qwertySpanish = [
-  //   ["Á", "É", "Í", "Ó", "Ú"],
-  //   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-  //   ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"],
-  //   ["Z", "X", "C", "V", "B", "N", "M"]
-  // ];
-
-  const letters = {
-    english: [
-      ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-      ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-      ["Z", "X", "C", "V", "B", "N", "M"]
-    ],
-    spanish: [
-      ["Á", "É", "Í", "Ó", "Ú"],
-      ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-      ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"],
-      ["Z", "X", "C", "V", "B", "N", "M"]
-    ]
-  };
 
   const [nameSpaces, setNameSpaces] = useState<string[][]>([]);
   const [currentSpace, setCurrentSpace] = useState<{ word: number, position: number}>({
@@ -161,7 +150,6 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     }
 
     setHasSubmitted(true);
-    // setHasPlayedToday(true);
   }
 
   // Solve Challenge
@@ -178,6 +166,18 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
     // setShowLetterBoxes(false);
     // setHasPlayedToday(true);
   }
+
+  function handleGuesses() {
+    const flatUserInput = nameSpaces.flat().join('').toLowerCase();
+    console.log('%cflatUserInput:', 'color:tomato', flatUserInput)
+    if (guessesLeft > 0) {
+      guesses.push(flatUserInput);
+      guessesLeft -= 1;
+    }
+  }
+
+  console.log('%cguesses:', 'color:tomato', guesses);
+  console.log('%cguessesLeft:', 'color:tomato', guessesLeft);
 
   const AnswerResults = () => {
     return (
@@ -208,11 +208,15 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
         }
       </>
     )
-  }
+  };
 
   return (
     <Stack pb="4em" style={{ margin: "0 auto", maxWidth: "500px" }} gap="sm">
       <FlagDisplay activeCountry={props.activeCountry} />
+      <Group justify="center" gap="xs">
+        <Text>Guesses Left:</Text>
+        <span>{guessesLeft}</span>
+      </Group>
       {/* <Group gap={5}>
         <Text>Guesses Left: </Text>
         <span>{guessesLeft}</span>
@@ -249,10 +253,7 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
             <Accordion.Panel>
               <Group gap="xs">
                 <TextInput
-                  style={{
-                    // flexGrow: 1
-                    width: "70%"
-                  }}
+                  style={{ width: "70%" }}
                   value={inputValue}
                   onChange={event => setInputValue(event.currentTarget.value)}
                 />
@@ -264,11 +265,11 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
           </Accordion.Item>
         </Accordion>
       }
-      {/* <Button>Guess</Button> */}
       {!hasSubmitted &&
         <Keyboard
           clickLetter={(letter: string) => handleClickLetter(letter)}
-          clickSubmit={handleClickSubmit}
+          // clickSubmit={handleClickSubmit}
+          clickSubmit={handleGuesses}
           language="english"
           letters={letters}
           onClickBackspace={handleClickBackspace}
@@ -285,7 +286,6 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
         </Paper>
       }
       {hasSubmitted && <AnswerResults />}
-      {/* <Button onClick={() => console.clear()}>Clear Console</Button> */}
     </Stack>
   )
 }

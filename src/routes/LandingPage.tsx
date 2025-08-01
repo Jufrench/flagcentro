@@ -93,8 +93,6 @@ export default function LandingPage() {
   //   setLastPlayed(dateValue);
   // }
 
-  console.warn("NEED TO HANDLE LOGIC FOR LAST PLAYED AND SUCH IN DAILYPLAYBANNER BECAUSE IT\'S USED MORE THAN ONCE")
-
   return (
     <>
       <Stack p="sm">

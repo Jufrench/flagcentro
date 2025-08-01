@@ -37,7 +37,7 @@ export default function DailyPlayBanner() {
   // const hasPlayedToday = true;
 
   // console.log('%chasPlayedToday:', 'border:1px solid limegreen', hasPlayedToday)
-  console.log('%cactiveCountry:', 'border:1px solid limegreen', activeCountry)
+  // console.log('%cactiveCountry:', 'border:1px solid limegreen', activeCountry)
 
   const PlayBannerContent = () => {
     return (
