@@ -2,8 +2,6 @@ import { useRef, useState } from "react";
 import { Alert, Button, Stack, TextInput } from "@mantine/core";
 import { IconBarrierBlock, IconCheck } from "@tabler/icons-react";
 
-
-import FlagDisplay from "../FlagDisplay";
 import Countries from "../../assets/countries.json";
 import { AnswerHint } from "../Hint/AnswerHint";
 // import SolveInput from "./SolveInput";

@@ -137,20 +137,20 @@ export default function DailyPlayContent(props: DailyPlayContentProps) {
   }
 
   // Submitting Answer
-  function handleClickSubmit() {
-    const flatUserInput = nameSpaces.flat().join('').toLowerCase();
-    const trimCountryName = countryName.replace(/\s/g, '').toLowerCase();
+  // function handleClickSubmit() {
+  //   const flatUserInput = nameSpaces.flat().join('').toLowerCase();
+  //   const trimCountryName = countryName.replace(/\s/g, '').toLowerCase();
 
-    if (flatUserInput === trimCountryName) {
-      console.log('%cYOU DID IT!', 'background:lightgreen');
-      setIsAnswerCorrect(true);
-    } else {
-      console.log('%cTry again next time!', 'color:tomato');
-      setIsAnswerCorrect(false);
-    }
+  //   if (flatUserInput === trimCountryName) {
+  //     console.log('%cYOU DID IT!', 'background:lightgreen');
+  //     setIsAnswerCorrect(true);
+  //   } else {
+  //     console.log('%cTry again next time!', 'color:tomato');
+  //     setIsAnswerCorrect(false);
+  //   }
 
-    setHasSubmitted(true);
-  }
+  //   setHasSubmitted(true);
+  // }
 
   // Solve Challenge
   function handleSolve() {
