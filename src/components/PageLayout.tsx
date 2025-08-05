@@ -14,7 +14,7 @@ export default function PageLayout() {
     top: 0,
     right: 0,
     left: 0,
-    background: "#fff",
+    // background: "#fff",
     borderBottom: "1px solid #ddd",
     zIndex: 1,
   };
@@ -31,7 +31,7 @@ export default function PageLayout() {
     bottom: 0,
     right: 0,
     left: 0,
-    background: "#fff",
+    // background: "#fff",
     borderTop: "1px solid #ddd",
   };
 

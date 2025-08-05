@@ -20,7 +20,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<Record<string, any>>();
 
   const getUser = async (email: string | undefined) => {
-    const response = await supabase.from("Users").select().eq('email', email);
+    const response = await supabase.from("Users").select().eq("email", email);
     // console.log('%c/// response', 'color:tomato', response);
     if (response.data) setUser(response.data?.[0]);
   }

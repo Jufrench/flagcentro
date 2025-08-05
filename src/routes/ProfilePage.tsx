@@ -1,4 +1,4 @@
-import { Avatar, Button, DEFAULT_THEME, Drawer, Group, MantineColorScheme, Paper, SegmentedControl, Select, Stack, Text, Title, useMantineColorScheme } from "@mantine/core";
+import { Avatar, Button, DEFAULT_THEME, Drawer, Group, MantineColorScheme, SegmentedControl, Select, Stack, Text, Title, useMantineColorScheme } from "@mantine/core";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { IconArrowRight } from "@tabler/icons-react";
@@ -7,6 +7,7 @@ import PersonalInfoContent from "../components/profile/PersonalInfoContent";
 import ChangePasswordContent from "../components/profile/ChangePasswordContent";
 import AvatarContent from "../components/profile/AvatarContent";
 import PrivacyContent from "../components/profile/PrivacyContent";
+import ProfilePaper from "../components/profile/ProfilePaper";
 
 enum DrawerContent {
   Avatar = "Avatar",
@@ -28,12 +29,6 @@ export default function ProfilePage() {
     fontWeight: 400,
   };
 
-  const itemWrapStyle = {
-    outline: "1px solid #d6d6d6",
-    backgroundColor: "#f6f6f6",
-    padding: DEFAULT_THEME.spacing.md
-  };
-
   function openDrawer(content: DrawerContent) {
     setDrawerContent(content);
     open();
@@ -42,7 +37,7 @@ export default function ProfilePage() {
   return (
     <>
       <Stack>
-        <Paper pt="xs" pr="xs" style={itemWrapStyle}>
+        <ProfilePaper>
           <Stack align="center" gap={0}>
             <Button
               variant="subtle"
@@ -52,14 +47,14 @@ export default function ProfilePage() {
             >
               Edit
             </Button>
-            <Stack>
+            <Stack align="center">
               <Avatar />
               <Title order={4}>{user.name}</Title>
             </Stack>
           </Stack>
-        </Paper>
+        </ProfilePaper>
         <Stack gap={0}>
-          <Paper style={itemWrapStyle}>
+          <ProfilePaper>
             <Button
               variant="subtle"
               justify="space-between"
@@ -70,8 +65,8 @@ export default function ProfilePage() {
             >
               Personal Info
             </Button>
-          </Paper>
-          <Paper style={itemWrapStyle}>
+          </ProfilePaper>
+          <ProfilePaper>
             <Button
               variant="subtle"
               justify="space-between"
@@ -82,8 +77,8 @@ export default function ProfilePage() {
             >
               Change Password
             </Button>
-          </Paper>
-          <Paper style={itemWrapStyle}>
+          </ProfilePaper>
+          <ProfilePaper>
             <Button
               variant="subtle"
               justify="space-between"
@@ -94,11 +89,11 @@ export default function ProfilePage() {
             >
               Privacy
             </Button>
-          </Paper>
+          </ProfilePaper>
         </Stack>
 
         <Stack gap={0}>
-          <Paper style={itemWrapStyle}>
+          <ProfilePaper>
             <Group>
               <Text>Color Mode</Text>
               <SegmentedControl
@@ -110,8 +105,8 @@ export default function ProfilePage() {
                 data={["light", "dark"]}
               />
             </Group>
-          </Paper>
-          <Paper style={itemWrapStyle}>
+          </ProfilePaper>
+          <ProfilePaper>
             <Group>
               <Text>Language</Text>
               <Select
@@ -119,7 +114,7 @@ export default function ProfilePage() {
                 data={["English", "Spanish"]}
               />
             </Group>
-          </Paper>
+          </ProfilePaper>
         </Stack>
         
         {/* <Divider />
