@@ -13,11 +13,12 @@ export default function PersonalInfoContent() {
 
   async function updatePeronsalInfo() {
     const response = await supabase.from("Users").update({ name }).eq("id", user.id);
-    if (response.status === 200) {
+    if (response.status === 204) {
       notifications.show({
         title: "Success!",
-        message: "Name updated successfully!"
+        message: "Name updated!"
       });
+      setIsEditing(false);
     }
   }
 

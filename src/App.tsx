@@ -11,8 +11,6 @@ import ProfilePage from './routes/ProfilePage';
 import HomePage from './routes/HomePage';
 
 import './App.css'
-import '@mantine/core/styles.css';
-import '@mantine/dropzone/styles.css';
 
 function App() {
   console.log('%cGo through index.css to remove unnecessary styling', 'color:tomato');
